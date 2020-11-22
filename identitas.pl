@@ -2,9 +2,6 @@ job(swordsman).
 job(archer).
 job(sorcerer).
 
-identitas(Job, )
-
-
 /** status **/
 status :-
     mulai(_),
