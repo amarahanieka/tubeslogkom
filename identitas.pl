@@ -1,15 +1,11 @@
-job(swordsman).
-job(archer).
-job(sorcerer).
-
-/** identitas(Job, Level, Attack, Defense, MaxHP) **/
-identitas(Job, 1, 10, 5, 100).
+/** identitas(Job, Level, Attack, Defense, MaxHP, Gold) **/
+identitas(Job, 1, 10, 5, 100, 0).
 
 /** status **/
 status :-
     mulai(_),
     job(Job),
-    identitas(Job, Level, Attack, Defense, MaxHP),
+    identitas(Job, Level, Attack, Defense, MaxHP, Gold),
     write('                              _        _             '), nl,
     write(' _   _  ___  _   _ _ __   ___| |_ __ _| |_ _   _ ___ '), nl,
     write('| | | |/ _ \\| | | | \'__| / __| __/ _` | __| | | / __|'), nl,
@@ -20,7 +16,8 @@ status :-
     write('Level: '), write(Level), nl,
     write('Attack: '), write(Attack), nl,
     write('Defense: '), write(Defense), nl,
-    write('Max HP: '), write(MaxHP), nl.
+    write('Max HP: '), write(MaxHP), nl,
+    write('Gold: '), write(Gold), nl.    
 
 status :-
     \+mulai(_), nl,

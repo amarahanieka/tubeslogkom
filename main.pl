@@ -54,7 +54,12 @@ start :-
     depanawal.
 
 startgame :-
+    \+udahdepan(_),
+    print('Pencet \'start.\' dulu hey').
+
+startgame :-
     \+mulai(_),
+    udahdepan(1),
     daftar,
     asserta(mulai(1)).
 
@@ -68,5 +73,5 @@ quit :-
 
 quit :-
     mulai(_),
-    retract(mulai(_)),
+    retract(mulai(_)), retract(udahdepan(_)),
     write('Terima kasih sudah bermain!'),!.
