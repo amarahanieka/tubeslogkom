@@ -26,6 +26,7 @@ depanawal :-
     write('%   a      : gerak ke barat 1 langkah                             %'), nl,
     write('%   status : menampilkan status pemain                            %'), nl,
     write('%   help   : menampilkan segala bantuan                           %'), nl,
+    write('%   quit   : keluar dari permainan                                %'), nl,
     write('%                                                                 %'), nl,
     write('% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %'), nl.
 
@@ -42,4 +43,14 @@ daftar :-
 start :-
     \+mulai(_),
     depanawal, nl,
-    daftar.
+    daftar,
+    asserta(mulai(1)).
+
+start :-
+    mulai(_),
+    write('Permainan sudah di mulai.').
+
+quit :-
+    \+mulai(_),
+    write('Permainan belum di mulai.'), !.
+
