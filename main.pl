@@ -1,4 +1,5 @@
 :- dynamic(mulai/1).
+:- dynamic(job/1).
 
 :- include('identitas.pl').
 
@@ -39,6 +40,7 @@ daftar :-
     write('3. sorcerer'), nl,
     write('Pilih pekerjaan yang anda inginkan (tulis swordsman/archer/sorcerer diakhiri .): '),
     read(Job), nl,
+    asserta(job(Job)),
     write('Anda memilih: '), write(Job).
 
 
@@ -56,3 +58,7 @@ quit :-
     \+mulai(_),
     write('Permainan belum di mulai.'), !.
 
+quit :-
+    mulai(_),
+    retract(mulai(_)),
+    write('Terima kasih sudah bermain!'),!.
