@@ -1,5 +1,7 @@
 :- dynamic(mulai/1).
 
+:- include('identitas.pl').
+
 depanawal :- 
     write('  _______  _______ .__   __.      _______. __    __   __  .__   __.     '), nl,
     write(' /  _____||   ____||  \\ |  |     /       ||  |  |  | |  | |  \\ |  |   '), nl,
@@ -32,12 +34,12 @@ depanawal :-
 
 daftar :-
     write('Choose your job!'), nl,
-    write('1. Swordsman'), nl,
-    write('2. Archer'), nl,
-    write('3. Sorcerer'), nl.
-    write('Insert tokemon: '),
-    read(Job).
-
+    write('1. swordsman'), nl,
+    write('2. archer'), nl,
+    write('3. sorcerer'), nl,
+    write('Pilih pekerjaan yang anda inginkan (tulis swordsman/archer/sorcerer diakhiri .): '),
+    read(Job), nl,
+    write('Anda memilih: '), write(Job).
 
 
 start :-
