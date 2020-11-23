@@ -6,6 +6,7 @@
 :- include('inventory.pl').
 :- include('help.pl').
 :- include('items.pl').
+:- include('map.pl').
 
 depanawal :- 
     \+udahdepan(_),
@@ -63,6 +64,8 @@ startgame :-
     \+mulai(_),
     udahdepan(1),
     daftar,
+    posisiAwal,
+    generateMusuh,
     asserta(mulai(1)).
 
 startgame :-
