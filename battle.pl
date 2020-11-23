@@ -7,5 +7,5 @@ attack(Senjata,B) :-
     B1 is HP1-Attack,
     enemy(_,_,Defense,_),
     B is B1+Defense,
-    enemy(_,_,_,B). 
-    /* masih ngeluarin false */
+    retract(enemy(Musuh,Attack,Defense,_)),
+    asserta(enemy(Musuh,Attack,Defense,B)).
