@@ -4,6 +4,8 @@
 
 :- include('identitas.pl').
 :- include('inventory.pl').
+:- include('help.pl').
+:- include('items.pl').
 
 depanawal :- 
     \+udahdepan(_),
