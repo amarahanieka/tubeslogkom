@@ -29,6 +29,7 @@ help :-
     write('%%%%%%%%%  COMMAND DALAM SHOP  %%%%%%%%%'), nl,
     write('shop             : Pemain memasuki shop.'), nl,
     write('gacha            : Pemain melakukan gacha senjata yang akan didapatkan.'), nl,
+    write('exitshop         : Pemain keluar dari shop.'), nl,
     write('Untuk potion, pemain dapat memilih secara langsung.'), nl, nl.
 
     
