@@ -7,6 +7,7 @@
 :- include('help.pl').
 :- include('items.pl').
 :- include('map.pl').
+:- include('move.pl').
 
 depanawal :- 
     \+udahdepan(_),
