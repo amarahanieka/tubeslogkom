@@ -8,6 +8,8 @@
 :- include('items.pl').
 :- include('map.pl').
 :- include('move.pl').
+:- include('battle.pl').
+:- include('enemy.pl').
 
 depanawal :- 
     \+udahdepan(_),
