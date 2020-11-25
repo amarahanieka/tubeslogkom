@@ -1,5 +1,6 @@
 /* attack(senjata yang dipake, HP akhir enemy) --> mengattack enemy */
 attack(Senjata) :-
+    inventory(Senjata,_),
     enemy(_,_,_,HP),
     senjata(Senjata,AttSen,Jenis,Owner),
     HP1 is HP-AttSen,
@@ -10,7 +11,12 @@ attack(Senjata) :-
     retract(enemy(Musuh,Attack,Defense,_)),
     asserta(enemy(Musuh,Attack,Defense,B)).
 
+attack(Senjata) :-
+    \+inventory(Senjata,_),
+    write('Tidak ada item tersebut di inventory anda').
+
 specialattack(Senjata) :-
+    inventory(Senjata,_),
     enemy(_,_,_,HP),
     senjata(Senjata,AttSen,Jenis,Owner),
     HP1 is HP-AttSen,
@@ -21,3 +27,7 @@ specialattack(Senjata) :-
     B is B2+DefenseE,
     retract(enemy(Musuh,Attack,Defense,_)),
     asserta(enemy(Musuh,Attack,Defense,B)).
+
+specialattack(Senjata) :-
+    \+inventory(Senjata,_),
+    write('Tidak ada item tersebut di inventory anda').
