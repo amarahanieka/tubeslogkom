@@ -52,7 +52,8 @@ daftar :-
     write('3. sorcerer'), nl,
     write('Pilih pekerjaan yang anda inginkan (tulis swordsman/archer/sorcerer diakhiri .): '),
     read(Job), nl,
-    asserta(job(Job)).
+    asserta(job(Job)),
+    modalawal(Job).
 
 
 start :-
@@ -82,4 +83,5 @@ quit :-
 quit :-
     mulai(_),
     retract(mulai(_)), retract(udahdepan(_)),
+    forall(iniinventory(_, _),(retract(iniinventory(_, _)))),
     write('Terima kasih sudah bermain!'),!.

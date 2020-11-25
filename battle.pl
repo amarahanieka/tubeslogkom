@@ -1,7 +1,7 @@
 /* attack(senjata yang dipake, HP akhir enemy) --> mengattack enemy */
 attack(Senjata,B) :-
     enemy(_,_,_,HP),
-    senjata(Senjata,AttSen,Jenis),
+    senjata(Senjata,AttSen,Jenis,Owner),
     HP1 is HP-AttSen,
     identitas(_,_,_,Attack,_,_),
     B1 is HP1-Attack,

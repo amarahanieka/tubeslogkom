@@ -1,4 +1,4 @@
-/** Senjata (senjata,attack,jenis,owner) **/
+/** Senjata (senjata,attack,jenis,Job) **/
 senjata(woodensword,0,senjata,swordsman).
 senjata(rocksword,5,senjata,swordsman).
 senjata(ironsword,10,senjata,swordsman).
@@ -31,4 +31,13 @@ potion(heal,potion).
 potion(doubleheal,potion).
 
 /* lain-lain wakwkakw */
-    
+modalawal(Job) :-
+    senjata(NamaSenjata,0,JenisSenjata,Job),
+    asserta(iniinventory(NamaSenjata, JenisSenjata)),
+    potion(NamaPotion,JenisPotion),
+    NamaPotion = fullblood,
+    asserta(iniinventory(NamaPotion, JenisPotion)),
+    asserta(iniinventory(NamaPotion, JenisPotion)),
+    asserta(iniinventory(NamaPotion, JenisPotion)),
+    asserta(iniinventory(NamaPotion, JenisPotion)),
+    asserta(iniinventory(NamaPotion, JenisPotion)).
