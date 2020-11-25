@@ -1,3 +1,5 @@
+:- dynamic(isInStore/1).
+
 w :-
     mulai(_),
     positionX(Xawal),
@@ -21,6 +23,8 @@ w :-
     NextY is (Yawal-1),
     isStore(Xawal,NextY),
     write('kamu sekarang sedang berada di Store, belilah beberapa barang'),nl,
+    write('untuk membeli barang silahkan masukkan perintah store. '),nl,
+    asserta(isInStore(1)),
     retract(positionY(_)),
     asserta(positionY(NextY)),!.
 
@@ -116,6 +120,8 @@ a :-
     NextX is (Xawal-1),
     isStore(NextX,Yawal),
     write('kamu sekarang sedang berada di Store, belilah beberapa barang'),nl,
+    write('untuk membeli barang silahkan masukkan perintah store. '),nl,
+    asserta(isInStore(1)),
     retract(positionX(_)),
     asserta(positionX(NextX)),!.
 
@@ -211,6 +217,8 @@ s :-
     NextY is (Yawal+1),
     isStore(Xawal,NextY),
     write('kamu sekarang sedang berada di Store, belilah beberapa barang'),nl,
+    write('untuk membeli barang silahkan masukkan perintah store. '),nl,
+    asserta(isInStore(1)),
     retract(positionY(_)),
     asserta(positionY(NextY)),!.
 
@@ -342,6 +350,8 @@ d :-
     NextX is (Xawal+1),
     isStore(NextX,Yawal),
     write('kamu sekarang sedang berada di Store, belilah beberapa barang'),nl,
+    write('untuk membeli barang silahkan masukkan perintah store. '),nl,
+    asserta(isInStore(1)),
     retract(positionX(_)),
     asserta(positionX(NextX)),!.
 

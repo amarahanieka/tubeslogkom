@@ -1,3 +1,5 @@
+:- dynamic(iniinventory/2).
+
 isimaks(100).
 
 cekpanjang(Length) :-
@@ -16,9 +18,18 @@ addItem(_) :-
     !,fail.
 
 addItem(Nama) :-
-    senjata(Nama, _, Jenis, _),
+    senjata(Nama, _, Jenis,_),
+    asserta(iniinventory(Nama, Jenis)).
+
+addItem(Nama) :-
     armor(Nama, _, Jenis),
-    potion(Nama, Jenis, _),
+    asserta(iniinventory(Nama, Jenis)).
+
+addItem(Nama) :-
+    potion(Nama, Jenis,_),
+    asserta(iniinventory(Nama, Jenis)).
+
+addItem(Nama) :-
     asesori(Nama,_,Jenis),
     asserta(iniinventory(Nama, Jenis)).
 

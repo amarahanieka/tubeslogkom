@@ -1,6 +1,3 @@
-/** identitas(Job, Level, Attack, Defense, MaxHP, Gold) **/
-identitas(Job, 1, 10, 5, 100, 0).
-
 /** status **/
 status :-
     mulai(_),

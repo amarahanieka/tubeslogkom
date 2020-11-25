@@ -23,18 +23,18 @@ asesori(swordenhancer,5,asesori).
 asesori(eagleseye,5,asesori).
 asesori(amulet,5,asesori).
 
-/** Potion (nama, jenis) **/
-potion(fullblood,potion).
-potion(patronus,potion).
-potion(powerplus,potion).
-potion(heal,potion).
-potion(doubleheal,potion).
+/** Potion (nama, jenis, harga) **/
+potion(fullblood,potion,200).
+potion(patronus,potion,100).
+potion(powerplus,potion,150).
+potion(heal,potion,50).
+potion(doubleheal,potion,100).
 
 /* lain-lain wakwkakw */
 modalawal(Job) :-
     senjata(NamaSenjata,0,JenisSenjata,Job),
     asserta(iniinventory(NamaSenjata, JenisSenjata)),
-    potion(NamaPotion,JenisPotion),
+    potion(NamaPotion,JenisPotion,_),
     NamaPotion = fullblood,
     asserta(iniinventory(NamaPotion, JenisPotion)),
     asserta(iniinventory(NamaPotion, JenisPotion)),
