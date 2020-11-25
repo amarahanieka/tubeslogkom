@@ -1,7 +1,7 @@
 isimaks(100).
 
 cekpanjang(Length) :-
-    findall(Name, inventory(Name, _), List),
+    findall(Name, iniinventory(Name, _), List),
     length(List, Length).
 
 penuh :-
@@ -20,15 +20,17 @@ addItem(Nama) :-
     armor(Nama, _, Jenis),
     potion(Nama, Jenis, _),
     asesori(Nama,_,Jenis),
-    asserta(inventory(Nama, Jenis)).
+    asserta(iniinventory(Nama, Jenis)).
 
 delItem(Nama) :-
-    \+inventory(Nama, Jenis),
+    \+iniinventory(Nama, Jenis),
     write('Tidak ada item tersebut di inventory anda'),
     !,fail.
 
-delItem(Nama) :- retract(inventory(Nama,_)),!.
+delItem(Nama) :- retract(iniinventory(Nama,_)),!.
 
+
+/* ngeprint euy */
 makeListItem(ListNama,ListJenis) :-
     findall(Nama, iniinventory(Nama,_), ListNama),
     findall(Jenis, iniinventory(_,Jenis), ListJenis).
