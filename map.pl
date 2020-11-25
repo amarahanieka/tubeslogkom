@@ -253,6 +253,54 @@ cetak(X,Y) :-
     NextX is (X+1),
     cetak(NextX,Y).
 
+w :- 
+    positionX(TmpX),
+    positionY(TmpY),
+    NextY is TmpY-1,
+    (isAtas(TmpX,NextY)->
+    write('Nabrak Bosque!!')
+    ;isPagar(TmpX,NextY)->
+    write('Nabrak Bosque!!');
+    retract(positionY(_)),
+    asserta(positionY(NextY)),
+    cetak(0,0),keteranganmap,!).
+    
+
+a :- 
+    positionX(TmpX),
+    positionY(TmpY),
+    NextX is TmpX-1,
+    (isKiri(NextX,TmpY)->
+    write('Nabrak Bosque!!')
+    ; isPagar(NextX,TmpY)->
+    write('Nabrak Bosque!!');
+    retract(positionX(_)),
+    asserta(positionX(NextX)),
+    cetak(0,0),keteranganmap,!).
+s :- 
+    positionX(TmpX),
+    positionY(TmpY),
+    NextY is TmpY+1,
+    (isBawah(TmpX,NextY)->
+    write('Nabrak Bosque!!')
+    ;isPagar(TmpX,NextY)->
+    write('Nabrak Bosque!!');
+    retract(positionY(_)),
+    asserta(positionY(NextY)),
+    cetak(0,0),keteranganmap,!).
+
+d :- 
+    positionX(TmpX),
+    positionY(TmpY),
+    NextX is TmpX+1,
+    (isKanan(NextX,TmpY)->
+    write('Nabrak Bosque!!')
+    ;isPagar(NextX,TmpY)->
+    write('Nabrak Bosque!!');
+    retract(positionX(_)),
+    asserta(positionX(NextX)),
+    cetak(0,0),keteranganmap,!).
+    
 map :-
     mulai(_),
     cetak(0,0),keteranganmap,!.
