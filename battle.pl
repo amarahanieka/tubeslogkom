@@ -16,7 +16,8 @@ specialattack(Senjata) :-
     HP1 is HP-AttSen,
     identitas(_,_,_,AttackP,_,_),
     B1 is HP1-AttackP,
+    B2 is B1*2
     enemy(_,_,DefenseE,_),
-    B is B1+DefenseE,
+    B is B2+DefenseE,
     retract(enemy(Musuh,Attack,Defense,_)),
     asserta(enemy(Musuh,Attack,Defense,B)).
