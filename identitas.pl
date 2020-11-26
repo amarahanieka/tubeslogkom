@@ -2,7 +2,7 @@
 status :-
     mulai(_),
     job(Job),
-    identitas(Job, Level, Attack, Defense, HP, Gold),
+    identitas(Job, Level, Attack, Defense, EXP, HP, Gold),
     write('                              _        _             '), nl,
     write(' _   _  ___  _   _ _ __   ___| |_ __ _| |_ _   _ ___ '), nl,
     write('| | | |/ _ \\| | | | \'__| / __| __/ _` | __| | | / __|'), nl,
@@ -13,7 +13,8 @@ status :-
     write('Level: '), write(Level), nl,
     write('Attack: '), write(Attack), nl,
     write('Defense: '), write(Defense), nl,
-    write('Max HP: '), write(MaxHP), nl,
+    write('EXP: '), write(EXP), nl,
+    write('HP: '), write(MaxHP), nl,
     write('Gold: '), write(Gold), nl.    
 
 status :-
