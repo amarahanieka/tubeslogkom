@@ -14,7 +14,7 @@ status :-
     write('Attack: '), write(Attack), nl,
     write('Defense: '), write(Defense), nl,
     write('EXP: '), write(EXP), nl,
-    write('HP: '), write(MaxHP), nl,
+    write('HP: '), write(HP), nl,
     write('Gold: '), write(Gold), nl.    
 
 status :-
