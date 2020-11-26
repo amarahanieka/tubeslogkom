@@ -21,7 +21,7 @@ attack(Senjata) :-
     write('HP Player: '), write(HPPFinal),!,nl,
     write('HP Enemy: '), write(HPEFinal),!, nl,
     (HPEFinal=<0, HPPFinal>0->
-    write('You Win'),nl,
+    write('You Win'),retract(isEnemyAlive(_)),nl,
     positionX(Xawal),
     positionY(Yawal),
     (isSlime(Xawal,Yawal,Xawal,Yawal,Xawal,Yawal),
@@ -39,7 +39,7 @@ attack(Senjata) :-
     retract(questlist(Slime,Goblin,_)), 
     asserta(questlist(Slime,Goblin,Wolf1))),
     cetak(0,0),keteranganmap,!;
-    HPEFinal>0, HPPFinal=<0->write('You Lose');
+    HPEFinal>0, HPPFinal=<0->write('You Lose'),quit;
     write('Musuh Belom Mati')).
 
 attack(Senjata) :-
@@ -66,7 +66,7 @@ specialattack(Senjata) :-
     write('HP Player: '), write(HPPFinal),nl,
     write('HP Enemy: '), write(HPEFinal),nl,
     (HPEFinal=<0, HPPFinal>0->
-    write('You Win'),nl,
+    write('You Win'),retract(isEnemyAlive(_)),nl,
     positionX(Xawal),
     positionY(Yawal),
     (isSlime(Xawal,Yawal,Xawal,Yawal,Xawal,Yawal),
@@ -84,7 +84,7 @@ specialattack(Senjata) :-
     retract(questlist(Slime,Goblin,_)), 
     asserta(questlist(Slime,Goblin,Wolf1))),
     cetak(0,0),keteranganmap,!;
-    HPEFinal>0, HPPFinal=<0->write('You Lose');
+    HPEFinal>0, HPPFinal=<0->write('You Lose'),quit;
     write('Musuh Belom Mati')).
 
 specialattack(Senjata) :-
