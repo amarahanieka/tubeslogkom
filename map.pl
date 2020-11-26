@@ -5,6 +5,7 @@
 :- dynamic(wolf/6).
 :- dynamic(isInStore/1).
 :- dynamic(isInQuest/1).
+:- dynamic(isEnemyAlive/1).
 
 kesamping(16).
 kebawah(16).
@@ -272,6 +273,7 @@ keteranganmap :-
 
 w :- 
     mulai(_),
+    \+isEnemyAlive(_),
     positionX(TmpX),
     positionY(TmpY),
     NextY is TmpY-1,
@@ -282,6 +284,7 @@ w :-
 
 w :-
     mulai(_),
+    \+isEnemyAlive(_),
     positionX(Xawal),
     positionY(Yawal),
     NextY is (Yawal-1),
@@ -294,6 +297,7 @@ w :-
 
 w :- 
     mulai(_),
+    \+isEnemyAlive(_),
     positionX(Xawal),
     positionY(Yawal),
     NextY is (Yawal-1),
@@ -306,6 +310,7 @@ w :-
 
 w :-
     mulai(_),
+    \+isEnemyAlive(_),
     positionX(Xawal),
     positionY(Yawal),
     NextY is (Yawal-1),
@@ -318,11 +323,13 @@ w :-
     write('      |__|      |__| |__________/  |__|  |__|     |__|   '),nl,
     write('                                                         '),nl,
     write('                   T  H  E   S  L  I  M  E '),nl,
+    asserta(isEnemyAlive(1)),
     retract(positionY(_)),
     asserta(positionY(NextY)),set(Xawal,Yawal),!.
 
 w :-
     mulai(_),
+    \+isEnemyAlive(_),
     positionX(Xawal),
     positionY(Yawal),
     NextY is (Yawal-1),
@@ -335,11 +342,13 @@ w :-
     write('      |__|      |__| |__________/  |__|  |__|     |__|   '),nl,
     write('                                                         '),nl,
     write('                   T  H  E   G  O  B  L  I  N '),nl,
+    asserta(isEnemyAlive(1)),
     retract(positionY(_)),
     asserta(positionY(NextY)),set(Xawal,Yawal),!.
 
 w :-
     mulai(_),
+    \+isEnemyAlive(_),
     positionX(Xawal),
     positionY(Yawal),
     NextY is (Yawal-1),
@@ -352,11 +361,13 @@ w :-
     write('      |__|      |__| |__________/  |__|  |__|     |__|   '),nl,
     write('                                                         '),nl,
     write('                     T  H  E   W  O  L  F '),nl,
+    asserta(isEnemyAlive(1)),
     retract(positionY(_)),
     asserta(positionY(NextY)),set(Xawal,Yawal),!.
 
 w :-
     mulai(_),
+    \+isEnemyAlive(_),
     positionX(Xawal),
     positionY(Yawal),
     NextY is (Yawal-1),
@@ -367,6 +378,7 @@ w :-
     
 a :- 
     mulai(_),
+    \+isEnemyAlive(_),
     positionX(TmpX),
     positionY(TmpY),
     NextX is TmpX-1,
@@ -377,6 +389,7 @@ a :-
 
 a :-
     mulai(_),
+    \+isEnemyAlive(_),
     positionX(Xawal),
     positionY(Yawal),
     NextX is (Xawal-1),
@@ -389,6 +402,7 @@ a :-
 
 a :- 
     mulai(_),
+    \+isEnemyAlive(_),
     positionX(Xawal),
     positionY(Yawal),
     NextX is (Xawal-1),
@@ -401,6 +415,7 @@ a :-
 
 a :-
     mulai(_),
+    \+isEnemyAlive(_),
     positionX(Xawal),
     positionY(Yawal),
     NextX is (Xawal-1),
@@ -413,11 +428,13 @@ a :-
     write('      |__|      |__| |__________/  |__|  |__|     |__|   '),nl,
     write('                                                         '),nl,
     write('                   T  H  E   S  L  I  M  E '),nl,
+    asserta(isEnemyAlive(1)),
     retract(positionX(_)),
     asserta(positionX(NextX)),set(Xawal,Yawal),!.
 
 a :-
     mulai(_),
+    \+isEnemyAlive(_),
     positionX(Xawal),
     positionY(Yawal),
     NextX is (Xawal-1),
@@ -430,11 +447,13 @@ a :-
     write('      |__|      |__| |__________/  |__|  |__|     |__|   '),nl,
     write('                                                         '),nl,
     write('                   T  H  E   G  O  B  L  I  N '),nl,
+    asserta(isEnemyAlive(1)),
     retract(positionX(_)),
     asserta(positionX(NextX)),set(Xawal,Yawal),!.
 
 a :-
     mulai(_),
+    \+isEnemyAlive(_),
     positionX(Xawal),
     positionY(Yawal),
     NextX is (Xawal-1),
@@ -447,11 +466,13 @@ a :-
     write('      |__|      |__| |__________/  |__|  |__|     |__|   '),nl,
     write('                                                         '),nl,
     write('                     T  H  E   W  O  L  F '),nl,
+    asserta(isEnemyAlive(1)),
     retract(positionX(_)),
     asserta(positionX(NextX)),set(Xawal,Yawal),!.
 
 a :-
     mulai(_),
+    \+isEnemyAlive(_),
     positionX(Xawal),
     positionY(Yawal),
     NextX is (Xawal-1),
@@ -460,6 +481,7 @@ a :-
 
 s :- 
     positionX(TmpX),
+    \+isEnemyAlive(_),
     positionY(TmpY),
     NextY is TmpY+1,
     (isBawah(TmpX,NextY)->
@@ -469,6 +491,7 @@ s :-
 
 s :-
     mulai(_),
+    \+isEnemyAlive(_),
     positionX(Xawal),
     positionY(Yawal),
     NextY is (Yawal+1),
@@ -481,6 +504,7 @@ s :-
 
 s :- 
     mulai(_),
+    \+isEnemyAlive(_),
     positionX(Xawal),
     positionY(Yawal),
     NextY is (Yawal+1),
@@ -493,6 +517,7 @@ s :-
 
 s :-
     mulai(_),
+    \+isEnemyAlive(_),
     positionX(Xawal),
     positionY(Yawal),
     NextY is (Yawal+1),
@@ -505,11 +530,13 @@ s :-
     write('      |__|      |__| |__________/  |__|  |__|     |__|   '),nl,
     write('                                                         '),nl,
     write('                   T  H  E   S  L  I  M  E '),nl,
+    asserta(isEnemyAlive(1)),
     retract(positionY(_)),
     asserta(positionY(NextY)),set(Xawal,Yawal),!.
 
 s :-
     mulai(_),
+    \+isEnemyAlive(_),
     positionX(Xawal),
     positionY(Yawal),
     NextY is (Yawal+1),
@@ -522,11 +549,13 @@ s :-
     write('      |__|      |__| |__________/  |__|  |__|     |__|   '),nl,
     write('                                                         '),nl,
     write('                   T  H  E   G  O  B  L  I  N '),nl,
+    asserta(isEnemyAlive(1)),
     retract(positionY(_)),
     asserta(positionY(NextY)),set(Xawal,Yawal),!.
 
 s :-
     mulai(_),
+    \+isEnemyAlive(_),
     positionX(Xawal),
     positionY(Yawal),
     NextY is (Yawal+1),
@@ -539,11 +568,13 @@ s :-
     write('      |__|      |__| |__________/  |__|  |__|     |__|   '),nl,
     write('                                                         '),nl,
     write('                     T  H  E   W  O  L  F '),nl,
+    asserta(isEnemyAlive(1)),
     retract(positionY(_)),
     asserta(positionY(NextY)),set(Xawal,Yawal),!.
 
 s :-
     mulai(_),
+    \+isEnemyAlive(_),
     positionX(Xawal),
     positionY(Yawal),
     NextY is (Yawal+1),
@@ -575,11 +606,13 @@ s :-
     write('      |   ______   |  |  |______|  |   ________|  |   ________|  |'),nl,
     write('      |  |______|  |  |            |  |           |  |           | '),nl,
     write('      |____________|  |____________|  |___________|  |___________|'),nl,
+    asserta(isEnemyAlive(1)),
     retract(positionY(_)),
     asserta(positionY(NextY)),set(Xawal,Yawal),!.
 
 s :-
     mulai(_),
+    \+isEnemyAlive(_),
     positionX(Xawal),
     positionY(Yawal),
     NextY is (Yawal+1),
@@ -587,6 +620,8 @@ s :-
     asserta(positionY(NextY)),set(Xawal,Yawal),map,!.
 
 d :- 
+    mulai(_),
+    \+isEnemyAlive(_),
     positionX(TmpX),
     positionY(TmpY),
     NextX is TmpX+1,
@@ -597,6 +632,7 @@ d :-
 
 d :-
     mulai(_),
+    \+isEnemyAlive(_),
     positionX(Xawal),
     positionY(Yawal),
     NextX is (Xawal+1),
@@ -609,6 +645,7 @@ d :-
 
 d :- 
     mulai(_),
+    \+isEnemyAlive(_),
     positionX(Xawal),
     positionY(Yawal),
     NextX is (Xawal+1),
@@ -621,6 +658,7 @@ d :-
 
 d :-
     mulai(_),
+    \+isEnemyAlive(_),
     positionX(Xawal),
     positionY(Yawal),
     NextX is (Xawal+1),
@@ -633,11 +671,13 @@ d :-
     write('      |__|      |__| |__________/  |__|  |__|     |__|   '),nl,
     write('                                                         '),nl,
     write('                   T  H  E   S  L  I  M  E '),nl,
+    asserta(isEnemyAlive(1)),
     retract(positionX(_)),
     asserta(positionX(NextX)),set(Xawal,Yawal),!.
 
 d :-
     mulai(_),
+    \+isEnemyAlive(_),
     positionX(Xawal),
     positionY(Yawal),
     NextX is (Xawal+1),
@@ -650,11 +690,13 @@ d :-
     write('      |__|      |__| |__________/  |__|  |__|     |__|   '),nl,
     write('                                                         '),nl,
     write('                   T  H  E   G  O  B  L  I  N '),nl,
+    asserta(isEnemyAlive(1)),
     retract(positionX(_)),
     asserta(positionX(NextX)),set(Xawal,Yawal),!.
 
 d :-
     mulai(_),
+    \+isEnemyAlive(_),
     positionX(Xawal),
     positionY(Yawal),
     NextX is (Xawal+1),
@@ -667,11 +709,13 @@ d :-
     write('      |__|      |__| |__________/  |__|  |__|     |__|   '),nl,
     write('                                                         '),nl,
     write('                     T  H  E   W  O  L  F '),nl,
+    asserta(isEnemyAlive(1)),
     retract(positionX(_)),
     asserta(positionX(NextX)),set(Xawal,Yawal),!.
 
 d :-
     mulai(_),
+    \+isEnemyAlive(_),
     positionX(Xawal),
     positionY(Yawal),
     NextX is (Xawal+1),
@@ -703,11 +747,13 @@ d :-
     write('      |   ______   |  |  |______|  |   ________|  |   ________|  |'),nl,
     write('      |  |______|  |  |            |  |           |  |           | '),nl,
     write('      |____________|  |____________|  |___________|  |___________|'),nl,
+    asserta(isEnemyAlive(1)),
     retract(positionX(_)),
     asserta(positionX(NextX)),set(Xawal,Yawal),!.
 
 d :-
     mulai(_),
+    \+isEnemyAlive(_),
     positionX(Xawal),
     positionY(Yawal),
     NextX is (Xawal+1),
