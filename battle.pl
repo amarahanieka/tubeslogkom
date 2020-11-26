@@ -1,9 +1,5 @@
 :- dynamic(enemy/4).
 :- dynamic(identitas/7).
-:- dynamic(count/1).
-:- dynamic(specialstatus/1).
-
-count(0).
 
 /* attack(senjata yang dipake, HP akhir enemy) --> mengattack enemy */
 attack(Senjata) :-
@@ -26,20 +22,31 @@ attack(Senjata) :-
     write('HP Enemy: '), write(HPEFinal),!, nl,
     (HPEFinal=<0, HPPFinal>0->
     write('You Win'),nl,
+    positionX(Xawal),
+    positionY(Yawal),
+    (isSlime(Xawal,Yawal,Xawal,Yawal,Xawal,Yawal),
+    questlist(Slime,Goblin,Wolf),
+    Slime1 is Slime-1,
+    retract(questlist(_,Goblin,Wolf)), 
+    asserta(questlist(Slime1,Goblin,Wolf)); 
+    isGoblin(Xawal,Yawal,Xawal,Yawal,Xawal,Yawal),
+    questlist(Slime,Goblin,Wolf),
+    Goblin1 is Goblin-1,
+    retract(questlist(Slime,_,Wolf)), 
+    asserta(questlist(Slime,Goblin1,Wolf));
+    questlist(Slime,Goblin,Wolf),
+    Wolf1 is Wolf-1,
+    retract(questlist(Slime,Goblin,_)), 
+    asserta(questlist(Slime,Goblin,Wolf1))),
     cetak(0,0),keteranganmap,!;
     HPEFinal>0, HPPFinal=<0->write('You Lose');
-    write('Musuh Belom Mati')),
-    count(X),
-    X1 is X+1,
-    retract(count(_)),
-    asserta(count(X1)),!.
+    write('Musuh Belom Mati')).
 
 attack(Senjata) :-
     \+iniinventory(Senjata,_),
     write('Tidak ada item tersebut di inventory anda').
 
 specialattack(Senjata) :-
-
     /* attack ke musuh */
     iniinventory(Senjata,_),
     enemy(_,AttackE,DefenseE,HPE),
@@ -60,13 +67,25 @@ specialattack(Senjata) :-
     write('HP Enemy: '), write(HPEFinal),nl,
     (HPEFinal=<0, HPPFinal>0->
     write('You Win'),nl,
+    positionX(Xawal),
+    positionY(Yawal),
+    (isSlime(Xawal,Yawal,Xawal,Yawal,Xawal,Yawal),
+    questlist(Slime,Goblin,Wolf),
+    Slime1 is Slime-1,
+    retract(questlist(_,Goblin,Wolf)), 
+    asserta(questlist(Slime1,Goblin,Wolf)); 
+    isGoblin(Xawal,Yawal,Xawal,Yawal,Xawal,Yawal),
+    questlist(Slime,Goblin,Wolf),
+    Goblin1 is Goblin-1,
+    retract(questlist(Slime,_,Wolf)), 
+    asserta(questlist(Slime,Goblin1,Wolf));
+    questlist(Slime,Goblin,Wolf),
+    Wolf1 is Wolf-1,
+    retract(questlist(Slime,Goblin,_)), 
+    asserta(questlist(Slime,Goblin,Wolf1))),
     cetak(0,0),keteranganmap,!;
     HPEFinal>0, HPPFinal=<0->write('You Lose');
-    write('Musuh Belom Mati')),
-    count(X),
-    X1 is X+1,
-    retract(count(_)),
-    asserta(count(X1)),!.
+    write('Musuh Belom Mati')).
 
 specialattack(Senjata) :-
     \+iniinventory(Senjata,_),
