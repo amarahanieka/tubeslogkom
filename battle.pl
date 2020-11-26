@@ -1,5 +1,9 @@
 :- dynamic(enemy/4).
 :- dynamic(identitas/7).
+:- dynamic(count/1).
+:- dynamic(specialstatus/1).
+
+count(0).
 
 /* attack(senjata yang dipake, HP akhir enemy) --> mengattack enemy */
 attack(Senjata) :-
@@ -24,13 +28,18 @@ attack(Senjata) :-
     write('You Win'),nl,
     cetak(0,0),keteranganmap,!;
     HPEFinal>0, HPPFinal=<0->write('You Lose');
-    write('Musuh Belom Mati')).
+    write('Musuh Belom Mati')),
+    count(X),
+    X1 is X+1,
+    retract(count(_)),
+    asserta(count(X1)),!.
 
 attack(Senjata) :-
     \+iniinventory(Senjata,_),
     write('Tidak ada item tersebut di inventory anda').
 
 specialattack(Senjata) :-
+
     /* attack ke musuh */
     iniinventory(Senjata,_),
     enemy(_,AttackE,DefenseE,HPE),
@@ -53,7 +62,11 @@ specialattack(Senjata) :-
     write('You Win'),nl,
     cetak(0,0),keteranganmap,!;
     HPEFinal>0, HPPFinal=<0->write('You Lose');
-    write('Musuh Belom Mati')).
+    write('Musuh Belom Mati')),
+    count(X),
+    X1 is X+1,
+    retract(count(_)),
+    asserta(count(X1)),!.
 
 specialattack(Senjata) :-
     \+iniinventory(Senjata,_),
