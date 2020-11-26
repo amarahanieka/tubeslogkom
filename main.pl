@@ -8,11 +8,11 @@
 :- include('help.pl').
 :- include('items.pl').
 :- include('map.pl').
-:- include('move.pl').
 :- include('battle.pl').
 :- include('enemy.pl').
 :- include('store.pl').
 :- include('leveling.pl').
+:- include('quest.pl').
 
 depanawal :- 
     \+udahdepan(_),
@@ -56,7 +56,7 @@ daftar :-
     write('Pilih pekerjaan yang anda inginkan (tulis swordsman/archer/sorcerer diakhiri .): '),
     read(Job), nl,
     asserta(job(Job)),
-    asserta(identitas(Job, 1, 10, 5, 0, 100, 50)),
+    asserta(identitas(Job, 1, 10, 5, 0, 100, 200)),
     modalawal(Job).
 
 

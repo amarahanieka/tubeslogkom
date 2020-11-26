@@ -3,6 +3,8 @@
 :- dynamic(slime/6).
 :- dynamic(goblin/6).
 :- dynamic(wolf/6).
+:- dynamic(isInStore/1).
+:- dynamic(isInQuest/1).
 
 kesamping(16).
 kebawah(16).
@@ -253,54 +255,6 @@ cetak(X,Y) :-
     NextX is (X+1),
     cetak(NextX,Y).
 
-w :- 
-    positionX(TmpX),
-    positionY(TmpY),
-    NextY is TmpY-1,
-    (isAtas(TmpX,NextY)->
-    write('Nabrak Bosque!!')
-    ;isPagar(TmpX,NextY)->
-    write('Nabrak Bosque!!');
-    retract(positionY(_)),
-    asserta(positionY(NextY)),
-    cetak(0,0),keteranganmap,!).
-    
-
-a :- 
-    positionX(TmpX),
-    positionY(TmpY),
-    NextX is TmpX-1,
-    (isKiri(NextX,TmpY)->
-    write('Nabrak Bosque!!')
-    ; isPagar(NextX,TmpY)->
-    write('Nabrak Bosque!!');
-    retract(positionX(_)),
-    asserta(positionX(NextX)),
-    cetak(0,0),keteranganmap,!).
-s :- 
-    positionX(TmpX),
-    positionY(TmpY),
-    NextY is TmpY+1,
-    (isBawah(TmpX,NextY)->
-    write('Nabrak Bosque!!')
-    ;isPagar(TmpX,NextY)->
-    write('Nabrak Bosque!!');
-    retract(positionY(_)),
-    asserta(positionY(NextY)),
-    cetak(0,0),keteranganmap,!).
-
-d :- 
-    positionX(TmpX),
-    positionY(TmpY),
-    NextX is TmpX+1,
-    (isKanan(NextX,TmpY)->
-    write('Nabrak Bosque!!')
-    ;isPagar(NextX,TmpY)->
-    write('Nabrak Bosque!!');
-    retract(positionX(_)),
-    asserta(positionX(NextX)),
-    cetak(0,0),keteranganmap,!).
-    
 map :-
     mulai(_),
     cetak(0,0),keteranganmap,!.
@@ -315,3 +269,455 @@ keteranganmap :-
     write('s : slime'),nl,
     write('g : goblin'),nl,
     write('w : wolf'),nl.
+
+w :- 
+    mulai(_),
+    positionX(TmpX),
+    positionY(TmpY),
+    NextY is TmpY-1,
+    (isAtas(TmpX,NextY)->
+    write('Nabrak Bosque!!')
+    ;isPagar(TmpX,NextY)->
+    write('Nabrak Bosque!!')),!.
+
+w :-
+    mulai(_),
+    positionX(Xawal),
+    positionY(Yawal),
+    NextY is (Yawal-1),
+    isStore(Xawal,NextY),
+    write('kamu sekarang sedang berada di Store, belilah beberapa barang'),nl,
+    write('untuk membeli barang silahkan masukkan perintah store. '),nl,
+    asserta(isInStore(1)),
+    retract(positionY(_)),
+    asserta(positionY(NextY)),!.
+
+w :- 
+    mulai(_),
+    positionX(Xawal),
+    positionY(Yawal),
+    NextY is (Yawal-1),
+    isQuest(Xawal,NextY),
+    write('kamu sekarang berada di quest, bersiaplah dan ambil misimu!'),nl,
+    write('untuk mengambil quest silahkan masukkan perintah quest.'),nl,
+    asserta(isInQuest(1)),
+    retract(positionY(_)),
+    asserta(positionY(NextY)),set(Xawal,Yawal),!.
+
+w :-
+    mulai(_),
+    positionX(Xawal),
+    positionY(Yawal),
+    NextY is (Yawal-1),
+    isSlime(Xawal,NextY,Xawal,NextY,Xawal,NextY),
+    write('       _______   __    ________     __    __   __________ '),nl,
+    write('      |  _____| |  |  /  ______|   |  |  |  | |___    ___|'),nl,
+    write('      |  |_____ |  | |  | ______   |  |__|  |     |  | '),nl,
+    write('      |  _____| |  | |  ||___   |  |   __   |     |  |   '),nl,
+    write('      |  |      |  | |  |____|  |  |  |  |  |     |  |   '),nl,
+    write('      |__|      |__| |__________/  |__|  |__|     |__|   '),nl,
+    write('                                                         '),nl,
+    write('                   T  H  E   S  L  I  M  E '),nl,
+    retract(positionY(_)),
+    asserta(positionY(NextY)),set(Xawal,Yawal),!.
+
+w :-
+    mulai(_),
+    positionX(Xawal),
+    positionY(Yawal),
+    NextY is (Yawal-1),
+    isGoblin(Xawal,NextY,Xawal,NextY,Xawal,NextY),
+    write('       _______   __    ________     __    __   __________ '),nl,
+    write('      |  _____| |  |  /  ______|   |  |  |  | |___    ___|'),nl,
+    write('      |  |_____ |  | |  | ______   |  |__|  |     |  | '),nl,
+    write('      |  _____| |  | |  ||___   |  |   __   |     |  |   '),nl,
+    write('      |  |      |  | |  |____|  |  |  |  |  |     |  |   '),nl,
+    write('      |__|      |__| |__________/  |__|  |__|     |__|   '),nl,
+    write('                                                         '),nl,
+    write('                   T  H  E   G  O  B  L  I  N '),nl,
+    retract(positionY(_)),
+    asserta(positionY(NextY)),set(Xawal,Yawal),!.
+
+w :-
+    mulai(_),
+    positionX(Xawal),
+    positionY(Yawal),
+    NextY is (Yawal-1),
+    isWolf(Xawal,NextY,Xawal,NextY,Xawal,NextY),
+    write('       _______   __    ________     __    __   __________ '),nl,
+    write('      |  _____| |  |  /  ______|   |  |  |  | |___    ___|'),nl,
+    write('      |  |_____ |  | |  | ______   |  |__|  |     |  | '),nl,
+    write('      |  _____| |  | |  ||___   |  |   __   |     |  |   '),nl,
+    write('      |  |      |  | |  |____|  |  |  |  |  |     |  |   '),nl,
+    write('      |__|      |__| |__________/  |__|  |__|     |__|   '),nl,
+    write('                                                         '),nl,
+    write('                     T  H  E   W  O  L  F '),nl,
+    retract(positionY(_)),
+    asserta(positionY(NextY)),set(Xawal,Yawal),!.
+
+w :-
+    mulai(_),
+    positionX(Xawal),
+    positionY(Yawal),
+    NextY is (Yawal-1),
+    retract(positionY(_)),
+    asserta(positionY(NextY)),nl,
+    set(Xawal,Yawal),
+    map,!.
+    
+a :- 
+    mulai(_),
+    positionX(TmpX),
+    positionY(TmpY),
+    NextX is TmpX-1,
+    (isKiri(NextX,TmpY)->
+    write('Nabrak Bosque!!')
+    ; isPagar(NextX,TmpY)->
+    write('Nabrak Bosque!!')),!.
+
+a :-
+    mulai(_),
+    positionX(Xawal),
+    positionY(Yawal),
+    NextX is (Xawal-1),
+    isStore(NextX,Yawal),
+    write('kamu sekarang sedang berada di Store, belilah beberapa barang'),nl,
+    write('untuk membeli barang silahkan masukkan perintah store. '),nl,
+    asserta(isInStore(1)),
+    retract(positionX(_)),
+    asserta(positionX(NextX)),!.
+
+a :- 
+    mulai(_),
+    positionX(Xawal),
+    positionY(Yawal),
+    NextX is (Xawal-1),
+    isQuest(NextX,Yawal),
+    write('kamu sekarang berada di quest, bersiaplah dan ambil misimu!'),nl,
+    write('untuk mengambil quest silahkan masukkan perintah quest.'),nl,
+    asserta(isInQuest(1)),
+    retract(positionX(_)),
+    asserta(positionX(NextX)),set(Xawal,Yawal),!.
+
+a :-
+    mulai(_),
+    positionX(Xawal),
+    positionY(Yawal),
+    NextX is (Xawal-1),
+    isSlime(NextX,Yawal,NextX,Yawal,NextX,Yawal),
+    write('       _______   __    ________     __    __   __________ '),nl,
+    write('      |  _____| |  |  /  ______|   |  |  |  | |___    ___|'),nl,
+    write('      |  |_____ |  | |  | ______   |  |__|  |     |  | '),nl,
+    write('      |  _____| |  | |  ||___   |  |   __   |     |  |   '),nl,
+    write('      |  |      |  | |  |____|  |  |  |  |  |     |  |   '),nl,
+    write('      |__|      |__| |__________/  |__|  |__|     |__|   '),nl,
+    write('                                                         '),nl,
+    write('                   T  H  E   S  L  I  M  E '),nl,
+    retract(positionX(_)),
+    asserta(positionX(NextX)),set(Xawal,Yawal),!.
+
+a :-
+    mulai(_),
+    positionX(Xawal),
+    positionY(Yawal),
+    NextX is (Xawal-1),
+    isGoblin(NextX,Yawal,NextX,Yawal,NextX,Yawal),
+    write('       _______   __    ________     __    __   __________ '),nl,
+    write('      |  _____| |  |  /  ______|   |  |  |  | |___    ___|'),nl,
+    write('      |  |_____ |  | |  | ______   |  |__|  |     |  | '),nl,
+    write('      |  _____| |  | |  ||___   |  |   __   |     |  |   '),nl,
+    write('      |  |      |  | |  |____|  |  |  |  |  |     |  |   '),nl,
+    write('      |__|      |__| |__________/  |__|  |__|     |__|   '),nl,
+    write('                                                         '),nl,
+    write('                   T  H  E   G  O  B  L  I  N '),nl,
+    retract(positionX(_)),
+    asserta(positionX(NextX)),set(Xawal,Yawal),!.
+
+a :-
+    mulai(_),
+    positionX(Xawal),
+    positionY(Yawal),
+    NextX is (Xawal-1),
+    isWolf(NextX,Yawal,NextX,Yawal,NextX,Yawal),
+    write('       _______   __    ________     __    __   __________ '),nl,
+    write('      |  _____| |  |  /  ______|   |  |  |  | |___    ___|'),nl,
+    write('      |  |_____ |  | |  | ______   |  |__|  |     |  | '),nl,
+    write('      |  _____| |  | |  ||___   |  |   __   |     |  |   '),nl,
+    write('      |  |      |  | |  |____|  |  |  |  |  |     |  |   '),nl,
+    write('      |__|      |__| |__________/  |__|  |__|     |__|   '),nl,
+    write('                                                         '),nl,
+    write('                     T  H  E   W  O  L  F '),nl,
+    retract(positionX(_)),
+    asserta(positionX(NextX)),set(Xawal,Yawal),!.
+
+a :-
+    mulai(_),
+    positionX(Xawal),
+    positionY(Yawal),
+    NextX is (Xawal-1),
+    retract(positionX(_)),
+    asserta(positionX(NextX)),set(Xawal,Yawal),map,!.
+
+s :- 
+    positionX(TmpX),
+    positionY(TmpY),
+    NextY is TmpY+1,
+    (isBawah(TmpX,NextY)->
+    write('Nabrak Bosque!!')
+    ;isPagar(TmpX,NextY)->
+    write('Nabrak Bosque!!')),!.
+
+s :-
+    mulai(_),
+    positionX(Xawal),
+    positionY(Yawal),
+    NextY is (Yawal+1),
+    isStore(Xawal,NextY),
+    write('kamu sekarang sedang berada di Store, belilah beberapa barang'),nl,
+    write('untuk membeli barang silahkan masukkan perintah store. '),nl,
+    asserta(isInStore(1)),
+    retract(positionY(_)),
+    asserta(positionY(NextY)),!.
+
+s :- 
+    mulai(_),
+    positionX(Xawal),
+    positionY(Yawal),
+    NextY is (Yawal+1),
+    isQuest(Xawal,NextY),
+    write('kamu sekarang berada di quest, bersiaplah dan ambil misimu!'),nl,
+    write('untuk mengambil quest silahkan masukkan perintah quest.'),nl,
+    asserta(isInQuest(1)),
+    retract(positionY(_)),
+    asserta(positionY(NextY)),set(Xawal,Yawal),!.
+
+s :-
+    mulai(_),
+    positionX(Xawal),
+    positionY(Yawal),
+    NextY is (Yawal+1),
+    isSlime(Xawal,NextY,Xawal,NextY,Xawal,NextY),
+    write('       _______   __    ________     __    __   __________ '),nl,
+    write('      |  _____| |  |  /  ______|   |  |  |  | |___    ___|'),nl,
+    write('      |  |_____ |  | |  | ______   |  |__|  |     |  | '),nl,
+    write('      |  _____| |  | |  ||___   |  |   __   |     |  |   '),nl,
+    write('      |  |      |  | |  |____|  |  |  |  |  |     |  |   '),nl,
+    write('      |__|      |__| |__________/  |__|  |__|     |__|   '),nl,
+    write('                                                         '),nl,
+    write('                   T  H  E   S  L  I  M  E '),nl,
+    retract(positionY(_)),
+    asserta(positionY(NextY)),set(Xawal,Yawal),!.
+
+s :-
+    mulai(_),
+    positionX(Xawal),
+    positionY(Yawal),
+    NextY is (Yawal+1),
+    isGoblin(Xawal,NextY,Xawal,NextY,Xawal,NextY),
+    write('       _______   __    ________     __    __   __________ '),nl,
+    write('      |  _____| |  |  /  ______|   |  |  |  | |___    ___|'),nl,
+    write('      |  |_____ |  | |  | ______   |  |__|  |     |  | '),nl,
+    write('      |  _____| |  | |  ||___   |  |   __   |     |  |   '),nl,
+    write('      |  |      |  | |  |____|  |  |  |  |  |     |  |   '),nl,
+    write('      |__|      |__| |__________/  |__|  |__|     |__|   '),nl,
+    write('                                                         '),nl,
+    write('                   T  H  E   G  O  B  L  I  N '),nl,
+    retract(positionY(_)),
+    asserta(positionY(NextY)),set(Xawal,Yawal),!.
+
+s :-
+    mulai(_),
+    positionX(Xawal),
+    positionY(Yawal),
+    NextY is (Yawal+1),
+    isWolf(Xawal,NextY,Xawal,NextY,Xawal,NextY),
+    write('       _______   __    ________     __    __   __________ '),nl,
+    write('      |  _____| |  |  /  ______|   |  |  |  | |___    ___|'),nl,
+    write('      |  |_____ |  | |  | ______   |  |__|  |     |  | '),nl,
+    write('      |  _____| |  | |  ||___   |  |   __   |     |  |   '),nl,
+    write('      |  |      |  | |  |____|  |  |  |  |  |     |  |   '),nl,
+    write('      |__|      |__| |__________/  |__|  |__|     |__|   '),nl,
+    write('                                                         '),nl,
+    write('                     T  H  E   W  O  L  F '),nl,
+    retract(positionY(_)),
+    asserta(positionY(NextY)),set(Xawal,Yawal),!.
+
+s :-
+    mulai(_),
+    positionX(Xawal),
+    positionY(Yawal),
+    NextY is (Yawal+1),
+    isBoss(Xawal,NextY),
+    write('           _______   __    ________     __    __   __________ '),nl,
+    write('          |  _____| |  |  /  ______|   |  |  |  | |___    ___|'),nl,
+    write('          |  |_____ |  | |  | ______   |  |__|  |     |  | '),nl,
+    write('          |  _____| |  | |  ||___   |  |   __   |     |  |   '),nl,
+    write('          |  |      |  | |  |____|  |  |  |  |  |     |  |   '),nl,
+    write('          |__|      |__| |__________/  |__|  |__|     |__|   '),nl,
+    write('                                                         '),nl,
+    write('                              T     H    E                   '),nl,
+    write('         /|                                                 /|     '),nl,
+    write('        /|/|__              ||||      ||||               __/|/| '),nl,
+    write('       /|/|/|/|             |  |      |  |              /|/|/|/|   '),nl,
+    write('      ||||||||||__          |  |______|  |           __|||||||||| '),nl,
+    write('      |||||||||||||__       |   ___ ___  |        __|||||||||||||'),nl,
+    write('       |__//||//||//||__    V  ||||||||| V     __||//||//||//||_|'),nl,
+    write('        |__//||//||//||/|    V   _____  V     ///||//||//||/ __|'),nl,
+    write('          |__||||||||||||  ___V  V|||V V___  |||||||||||||| __| '),nl,
+    write('             |__//||//||| |    V______V    | |//||//||//||__/ '),nl,
+    write('      ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||'),nl,
+    write('      ============================================================'),nl,
+    write('      ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||'),nl,
+    write('       ____________    ____________    ___________    ___________'),nl,
+    write('      |   ______   |  |  _______   |  |   ________|  |   ________|'),nl,
+    write('      |  |______|  |  |  |      |  |  |  |________   |  |________'),nl,
+    write('      |  __________/  |  |      |  |  |________   |  |________   | '),nl,
+    write('      |   ______   |  |  |______|  |   ________|  |   ________|  |'),nl,
+    write('      |  |______|  |  |            |  |           |  |           | '),nl,
+    write('      |____________|  |____________|  |___________|  |___________|'),nl,
+    retract(positionY(_)),
+    asserta(positionY(NextY)),set(Xawal,Yawal),!.
+
+s :-
+    mulai(_),
+    positionX(Xawal),
+    positionY(Yawal),
+    NextY is (Yawal+1),
+    retract(positionY(_)),
+    asserta(positionY(NextY)),set(Xawal,Yawal),map,!.
+
+d :- 
+    positionX(TmpX),
+    positionY(TmpY),
+    NextX is TmpX+1,
+    (isKanan(NextX,TmpY)->
+    write('Nabrak Bosque!!')
+    ;isPagar(NextX,TmpY)->
+    write('Nabrak Bosque!!')),!.
+
+d :-
+    mulai(_),
+    positionX(Xawal),
+    positionY(Yawal),
+    NextX is (Xawal+1),
+    isStore(NextX,Yawal),
+    write('kamu sekarang sedang berada di Store, belilah beberapa barang'),nl,
+    write('untuk membeli barang silahkan masukkan perintah store. '),nl,
+    asserta(isInStore(1)),
+    retract(positionX(_)),
+    asserta(positionX(NextX)),!.
+
+d :- 
+    mulai(_),
+    positionX(Xawal),
+    positionY(Yawal),
+    NextX is (Xawal+1),
+    isQuest(NextX,Yawal),
+    write('kamu sekarang berada di quest, bersiaplah dan ambil misimu!'),nl,
+    write('untuk mengambil quest silahkan masukkan perintah quest.'),nl,
+    asserta(isInQuest(1)),
+    retract(positionX(_)),
+    asserta(positionX(NextX)),set(Xawal,Yawal),!.
+
+d :-
+    mulai(_),
+    positionX(Xawal),
+    positionY(Yawal),
+    NextX is (Xawal+1),
+    isSlime(NextX,Yawal,NextX,Yawal,NextX,Yawal),
+    write('       _______   __    ________     __    __   __________ '),nl,
+    write('      |  _____| |  |  /  ______|   |  |  |  | |___    ___|'),nl,
+    write('      |  |_____ |  | |  | ______   |  |__|  |     |  | '),nl,
+    write('      |  _____| |  | |  ||___   |  |   __   |     |  |   '),nl,
+    write('      |  |      |  | |  |____|  |  |  |  |  |     |  |   '),nl,
+    write('      |__|      |__| |__________/  |__|  |__|     |__|   '),nl,
+    write('                                                         '),nl,
+    write('                   T  H  E   S  L  I  M  E '),nl,
+    retract(positionX(_)),
+    asserta(positionX(NextX)),set(Xawal,Yawal),!.
+
+d :-
+    mulai(_),
+    positionX(Xawal),
+    positionY(Yawal),
+    NextX is (Xawal+1),
+    isGoblin(NextX,Yawal,NextX,Yawal,NextX,Yawal),
+    write('       _______   __    ________     __    __   __________ '),nl,
+    write('      |  _____| |  |  /  ______|   |  |  |  | |___    ___|'),nl,
+    write('      |  |_____ |  | |  | ______   |  |__|  |     |  | '),nl,
+    write('      |  _____| |  | |  ||___   |  |   __   |     |  |   '),nl,
+    write('      |  |      |  | |  |____|  |  |  |  |  |     |  |   '),nl,
+    write('      |__|      |__| |__________/  |__|  |__|     |__|   '),nl,
+    write('                                                         '),nl,
+    write('                   T  H  E   G  O  B  L  I  N '),nl,
+    retract(positionX(_)),
+    asserta(positionX(NextX)),set(Xawal,Yawal),!.
+
+d :-
+    mulai(_),
+    positionX(Xawal),
+    positionY(Yawal),
+    NextX is (Xawal+1),
+    isWolf(NextX,Yawal,NextX,Yawal,NextX,Yawal),
+    write('       _______   __    ________     __    __   __________ '),nl,
+    write('      |  _____| |  |  /  ______|   |  |  |  | |___    ___|'),nl,
+    write('      |  |_____ |  | |  | ______   |  |__|  |     |  | '),nl,
+    write('      |  _____| |  | |  ||___   |  |   __   |     |  |   '),nl,
+    write('      |  |      |  | |  |____|  |  |  |  |  |     |  |   '),nl,
+    write('      |__|      |__| |__________/  |__|  |__|     |__|   '),nl,
+    write('                                                         '),nl,
+    write('                     T  H  E   W  O  L  F '),nl,
+    retract(positionX(_)),
+    asserta(positionX(NextX)),set(Xawal,Yawal),!.
+
+d :-
+    mulai(_),
+    positionX(Xawal),
+    positionY(Yawal),
+    NextX is (Xawal+1),
+    isBoss(NextX,Yawal),
+    write('           _______   __    ________     __    __   __________ '),nl,
+    write('          |  _____| |  |  /  ______|   |  |  |  | |___    ___|'),nl,
+    write('          |  |_____ |  | |  | ______   |  |__|  |     |  | '),nl,
+    write('          |  _____| |  | |  ||___   |  |   __   |     |  |   '),nl,
+    write('          |  |      |  | |  |____|  |  |  |  |  |     |  |   '),nl,
+    write('          |__|      |__| |__________/  |__|  |__|     |__|   '),nl,
+    write('                                                         '),nl,
+    write('                              T     H    E                   '),nl,
+    write('         /|                                                 /|     '),nl,
+    write('        /|/|__              ||||      ||||               __/|/| '),nl,
+    write('       /|/|/|/|             |  |      |  |              /|/|/|/|   '),nl,
+    write('      ||||||||||__          |  |______|  |           __|||||||||| '),nl,
+    write('      |||||||||||||__       |   ___ ___  |        __|||||||||||||'),nl,
+    write('       |__//||//||//||__    V  ||||||||| V     __||//||//||//||_|'),nl,
+    write('        |__//||//||//||/|    V   _____  V     ///||//||//||/ __|'),nl,
+    write('          |__||||||||||||  ___V  V|||V V___  |||||||||||||| __| '),nl,
+    write('             |__//||//||| |    V______V    | |//||//||//||__/ '),nl,
+    write('      ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||'),nl,
+    write('      ============================================================'),nl,
+    write('      ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||'),nl,
+    write('       ____________    ____________    ___________    ___________'),nl,
+    write('      |   ______   |  |  _______   |  |   ________|  |   ________|'),nl,
+    write('      |  |______|  |  |  |      |  |  |  |________   |  |________'),nl,
+    write('      |  __________/  |  |      |  |  |________   |  |________   | '),nl,
+    write('      |   ______   |  |  |______|  |   ________|  |   ________|  |'),nl,
+    write('      |  |______|  |  |            |  |           |  |           | '),nl,
+    write('      |____________|  |____________|  |___________|  |___________|'),nl,
+    retract(positionX(_)),
+    asserta(positionX(NextX)),set(Xawal,Yawal),!.
+
+d :-
+    mulai(_),
+    positionX(Xawal),
+    positionY(Yawal),
+    NextX is (Xawal+1),
+    retract(positionX(_)),
+    asserta(positionX(NextX)),set(Xawal,Yawal),map,!.
+
+set(X,Y) :-
+    isStore(X,Y),
+    retract(isInStore(_)),!.
+
+set(X,Y) :-
+    1 =:= 1.
+    

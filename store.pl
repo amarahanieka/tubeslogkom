@@ -43,7 +43,7 @@ beliequipment :-
 
 beliequipment :-
     /* misalnya harga untuk gacha itu 150 gold */
-    identitas(_,_,_,_,_, Gold),
+    identitas(_,_,_,_,_,_, Gold),
     Gold < 150,
     write('Maaf, emas anda belum cukup. Lakukan quest untuk bisa dapatkan emas!'),nl,!.
 
@@ -56,10 +56,10 @@ beliequipment :-
     random(0,X,Hasil),
     equSwordsman(Hasil,Dapat,_,_),
     addItem(Dapat),
-    identitas(Job, Level, Attack, Defense, MaxHP, Gold),
+    identitas(Job, Level, Attack, Defense, EXP, HP, Gold),
     Y is (Gold-150),
-    retract(identitas(Job, Level, Attack, Defense, MaxHP, Gold)),
-    asserta(identitas(Job, Level, Attack, Defense, MaxHP, Y)),
+    retract(identitas(Job, Level, Attack, Defense, EXP, HP, Gold)),
+    asserta(identitas(Job, Level, Attack, Defense, EXP, HP, Y)),
     write('Selamat, anda mendapatkan '),
     write(Dapat),nl,
     write('sisa uang anda = '), write(Y),nl,
@@ -75,10 +75,10 @@ beliequipment :-
     random(0,X,Hasil),
     equArcher(Hasil,Dapat,_,_),
     addItem(Dapat),
-    identitas(Job, Level, Attack, Defense, MaxHP, Gold),
+    identitas(Job, Level, Attack, Defense, EXP, HP, Gold),
     Y is (Gold-150),
-    retract(identitas(_,_,_,_,_,_)),
-    asserta(identitas(Job, Level, Attack, Defense, MaxHP, Y)),
+    retract(identitas(_,_,_,_,_,_,_)),
+    asserta(identitas(Job, Level, Attack, Defense, EXP, HP, Y)),
     write('Selamat, anda mendapatkan '),
     write(Dapat),nl,
     write('sisa uang anda = '), write(Y),nl,
@@ -96,8 +96,8 @@ beliequipment :-
     addItem(Dapat),
     identitas(Job, Level, Attack, Defense, MaxHP, Gold),
     Y is (Gold-150),
-    retract(identitas(_,_,_,_,_,_)),
-    asserta(identitas(Job, Level, Attack, Defense, MaxHP, Y)),
+    retract(identitas(_,_,_,_,_,_,_)),
+    asserta(identitas(Job, Level, Attack, Defense, EXP, HP, Y)),
     write('Selamat, anda mendapatkan '),
     write(Dapat),nl,
     write('sisa uang anda = '), write(Y),nl,
@@ -116,16 +116,16 @@ belipotion :-
 
 bisabelipotion(Pot) :-
     potion(Pot,_,Harga),
-    identitas(Job, Level, Attack, Defense, MaxHP, Gold),
+    identitas(Job, Level, Attack, Defense, EXP, HP, Gold),
     Harga > Gold,
     write('maaf uang anda tidak cukup untuk membeli potion ini'),nl,!.
 
 bisabelipotion(Pot) :-
     potion(Pot,_,Harga),
-    identitas(Job, Level, Attack, Defense, MaxHP, Gold),
+    identitas(Job, Level, Attack, Defense, EXP, HP, Gold),
     X is Gold-Harga,
-    retract(identitas(_,_,_,_,_,_)),
-    asserta(identitas(Job, Level, Attack, Defense, MaxHP, X)),
+    retract(identitas(_,_,_,_,_,_,_)),
+    asserta(identitas(Job, Level, Attack, Defense, EXP, HP, X)),
     addItem(Pot),
     write('Yeay, anda sudah membeli 1 buah '),write(Pot),nl,
     write('sisa uang anda = '), write(X),nl,
