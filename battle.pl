@@ -1,5 +1,5 @@
-:- dynamic enemy/4.
-:- dynamic identitas/7.
+:- dynamic(enemy/4).
+:- dynamic(identitas/7).
 
 /* attack(senjata yang dipake, HP akhir enemy) --> mengattack enemy */
 attack(Senjata) :-

@@ -89,4 +89,6 @@ quit :-
     retract(mulai(_)), retract(udahdepan(_)),
     forall(iniinventory(_, _),(retract(iniinventory(_, _)))),
     forall(identitas(_,_,_,_,_,_,_),(retract(identitas(_,_,_,_,_,_,_)))),
+    retract(positionX(_)),
+    retract(positionY(_)),
     write('Terima kasih sudah bermain!'),!.
