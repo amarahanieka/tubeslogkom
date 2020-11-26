@@ -1,10 +1,10 @@
 /* questlist(Slime,Goblin,Wolf) */
 :- dynamic(questlist/3).
 
-/* questlv(Level,Slime,Goblin,Wolf,HadiahGold) */
+/* questlv(Level,Slime,Goblin,Wolf,TambahanEXP) */
 questlv(1,1,1,1,500).
 questlv(2,2,2,2,1000).
-questlv(3,3,3,3,2000).
+questlv(3,3,3,3,1500).
 
 quest :-
     \+isInQuest(_),
@@ -48,7 +48,7 @@ lihatquest :-
 questberhasil :-
     questlist(0,0,0),
     identitas(Job, Level, Attack, Defense, EXP, HP, Gold),
-    questlv(Level,_,_,_,Hadiah),
+    questlv(Level,_,_,_,E),
     write('*******************************************************************************'),nl,
     write('           ____    ____           ____    _______    ____    _______           '),nl,
     write('          (____   (____   |      (____)  (   |   )  (____)      |              '),nl,
@@ -56,8 +56,8 @@ questberhasil :-
     write('           A N D A   B E R H A S I L   M E N Y E L E S A I K A N '),nl,
     write('                            Q  U  E  S  T     '),nl,nl,
     write('                           ANDA MENDAPATKAN : '),nl,
-    write('                              '),write(Hadiah),write(' Gold '),nl,nl,
+    write('                              +'),write(E),write(' EXP '),nl,nl,
     write('*********************************************************************************'),nl,
-    Y is Gold+Hadiah,
+    Y is EXP+E,
     retract(identitas(_,_,_,_,_,_,_)),
-    asserta(identitas(Job, Level, Attack, Defense, EXP, HP, Y)),!.
+    asserta(identitas(Job, Level, Attack, Defense, Y, HP, Gold)),!.

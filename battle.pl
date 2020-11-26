@@ -28,16 +28,16 @@ attack(Senjata) :-
     questlist(Slime,Goblin,Wolf),
     Slime1 is Slime-1,
     retract(questlist(_,Goblin,Wolf)), 
-    asserta(questlist(Slime1,Goblin,Wolf)); 
+    asserta(questlist(Slime1,Goblin,Wolf)),(Slime1 =:= 0,questberhasil); 
     isGoblin(Xawal,Yawal,Xawal,Yawal,Xawal,Yawal),
     questlist(Slime,Goblin,Wolf),
     Goblin1 is Goblin-1,
     retract(questlist(Slime,_,Wolf)), 
-    asserta(questlist(Slime,Goblin1,Wolf));
+    asserta(questlist(Slime,Goblin1,Wolf)),(Goblin1 =:= 0,questberhasil);
     questlist(Slime,Goblin,Wolf),
     Wolf1 is Wolf-1,
     retract(questlist(Slime,Goblin,_)), 
-    asserta(questlist(Slime,Goblin,Wolf1))),
+    asserta(questlist(Slime,Goblin,Wolf1)),(Wolf1 =:= 0,questberhasil)),
     cetak(0,0),keteranganmap,!;
     HPEFinal>0, HPPFinal=<0->write('You Lose'),quit;
     write('Musuh Belom Mati')).
@@ -93,7 +93,7 @@ specialattack(Senjata) :-
 
 run :- 
     random(0,2,Hasil),
-    (Hasil=:=0->write('GAGAL KABUR BANG');cetak(0,0),keteranganmap,!).
+    (Hasil=:=0->write('GAGAL KABUR BANG');retract(isEnemyAlive(_)),cetak(0,0),keteranganmap,!).
 
 usepotion(potion) :-
     \+iniinventory(potion,_),
