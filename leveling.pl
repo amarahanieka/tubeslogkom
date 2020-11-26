@@ -26,3 +26,4 @@ nilai attack itu tetep (abis battle jg tetep)
 nilai defense juga tetep (abis battle jg tetep) 
 EXP ga berubah, jadi kalo sebelum level up 521, setelah level up juga tetep 521 ga ngulang dari awal */
 
+/* naik level dari 1 ke 2: naiklevel(1), begitu pula seterusnya kaoakoakoa */
