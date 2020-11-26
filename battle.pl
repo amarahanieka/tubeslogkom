@@ -18,8 +18,13 @@ attack(Senjata) :-
     asserta(enemy(Musuh,Attack,Defense,HPEFinal)),
     retract(identitas(Job,Level,Attack,Defense,EXP,_,Gold)),
     asserta(identitas(Job,Level,Attack,Defense,EXP,HPPFinal,Gold)),
-    write('HP Player: '), write(HPPFinal),nl,
-    write('HP Enemy: '), write(HPEFinal),!.
+    write('HP Player: '), write(HPPFinal),!,nl,
+    write('HP Enemy: '), write(HPEFinal),!, nl,
+    (HPEFinal=<0, HPPFinal>0->
+    write('You Win'),nl,
+    cetak(0,0),keteranganmap,!;
+    HPEFinal>0, HPPFinal=<0->write('You Lose');
+    write('Musuh Belom Mati')).
 
 attack(Senjata) :-
     \+iniinventory(Senjata,_),
@@ -43,7 +48,12 @@ specialattack(Senjata) :-
     retract(identitas(Job,Level,Attack,Defense,EXP,_,Gold)),
     asserta(identitas(Job,Level,Attack,Defense,EXP,HPPFinal,Gold)),
     write('HP Player: '), write(HPPFinal),nl,
-    write('HP Enemy: '), write(HPEFinal),!.
+    write('HP Enemy: '), write(HPEFinal),nl,
+    (HPEFinal=<0, HPPFinal>0->
+    write('You Win'),nl,
+    cetak(0,0),keteranganmap,!;
+    HPEFinal>0, HPPFinal=<0->write('You Lose');
+    write('Musuh Belom Mati')).
 
 specialattack(Senjata) :-
     \+iniinventory(Senjata,_),
@@ -52,3 +62,49 @@ specialattack(Senjata) :-
 run :- 
     random(0,2,Hasil),
     (Hasil=:=0->write('GAGAL KABUR BANG');cetak(0,0),keteranganmap,!).
+
+usepotion(potion) :-
+    \+iniinventory(potion,_),
+    write('Tidak ada item tersebut di inventory anda').
+
+usepotion(potion) :-
+    iniinventory(potion,_),
+    potion == fullblood,
+    identitas(_,1,_,_,_,_,_),
+    retract(identitas(Job,Level,Attack,Defense,EXP,_,Gold)),
+    asserta(identitas(Job,Level,Attack,Defense,EXP,100,Gold)),
+    write("Your HP: "), write('100'),!.
+
+usepotion(potion) :-
+    iniinventory(potion,_),
+    potion == fullblood,
+    identitas(_,2,_,_,_,_,_),
+    retract(identitas(Job,Level,Attack,Defense,EXP,_,Gold)),
+    asserta(identitas(Job,Level,Attack,Defense,EXP,500,Gold)),
+    write("Your HP: "), write('500'),!.
+
+usepotion(potion) :-
+    iniinventory(potion,_),
+    potion == fullblood,
+    identitas(_,3,_,_,_,_,_),
+    retract(identitas(Job,Level,Attack,Defense,EXP,_,Gold)),
+    asserta(identitas(Job,Level,Attack,Defense,EXP,1000,Gold)),
+    write("Your HP: "), write('1000'),!.
+
+usepotion(potion) :-
+    iniinventory(potion,_),
+    potion == heal,
+    identitas(_,_,_,_,_,HP,_),
+    HPheal is HP + 50,
+    retract(identitas(Job,Level,Attack,Defense,EXP,_,Gold)),
+    asserta(identitas(Job,Level,Attack,Defense,EXP,HPheal,Gold)),
+    write("Your HP: "), write(HPheal),!.
+
+usepotion(potion) :-
+    iniinventory(potion,_),
+    potion == heal,
+    identitas(_,_,_,_,_,HP,_),
+    HPdoubleheal is HP + 100,
+    retract(identitas(Job,Level,Attack,Defense,EXP,_,Gold)),
+    asserta(identitas(Job,Level,Attack,Defense,EXP,HPdoubleheal,Gold)),
+    write("Your HP: "), write(HPdoubleheal),!.
