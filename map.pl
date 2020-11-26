@@ -302,7 +302,7 @@ w :-
     write('untuk mengambil quest silahkan masukkan perintah quest.'),nl,
     asserta(isInQuest(1)),
     retract(positionY(_)),
-    asserta(positionY(NextY)),set(Xawal,Yawal),!.
+    asserta(positionY(NextY)),!.
 
 w :-
     mulai(_),
@@ -397,7 +397,7 @@ a :-
     write('untuk mengambil quest silahkan masukkan perintah quest.'),nl,
     asserta(isInQuest(1)),
     retract(positionX(_)),
-    asserta(positionX(NextX)),set(Xawal,Yawal),!.
+    asserta(positionX(NextX)),!.
 
 a :-
     mulai(_),
@@ -489,7 +489,7 @@ s :-
     write('untuk mengambil quest silahkan masukkan perintah quest.'),nl,
     asserta(isInQuest(1)),
     retract(positionY(_)),
-    asserta(positionY(NextY)),set(Xawal,Yawal),!.
+    asserta(positionY(NextY)),!.
 
 s :-
     mulai(_),
@@ -617,7 +617,7 @@ d :-
     write('untuk mengambil quest silahkan masukkan perintah quest.'),nl,
     asserta(isInQuest(1)),
     retract(positionX(_)),
-    asserta(positionX(NextX)),set(Xawal,Yawal),!.
+    asserta(positionX(NextX)),!.
 
 d :-
     mulai(_),
@@ -717,6 +717,10 @@ d :-
 set(X,Y) :-
     isStore(X,Y),
     retract(isInStore(_)),!.
+
+set(X,Y) :-
+    isQuest(X,Y),
+    retract(isInQuest(_)),!.
 
 set(X,Y) :-
     1 =:= 1.
