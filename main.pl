@@ -1,7 +1,7 @@
 :- dynamic(mulai/1).
 :- dynamic(job/1).
 :- dynamic(udahdepan/1).
-:- dynamic(identitas/6).
+:- dynamic(identitas/7).
 
 :- include('identitas.pl').
 :- include('inventory.pl').
@@ -12,6 +12,7 @@
 :- include('battle.pl').
 :- include('enemy.pl').
 :- include('store.pl').
+:- include('leveling.pl').
 
 depanawal :- 
     \+udahdepan(_),
@@ -55,7 +56,7 @@ daftar :-
     write('Pilih pekerjaan yang anda inginkan (tulis swordsman/archer/sorcerer diakhiri .): '),
     read(Job), nl,
     asserta(job(Job)),
-    asserta(identitas(Job, 1, 10, 5, 100, 50)),
+    asserta(identitas(Job, 1, 10, 5, 0, 100, 50)),
     modalawal(Job).
 
 
