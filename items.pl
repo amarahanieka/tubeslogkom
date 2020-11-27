@@ -25,8 +25,6 @@ asesori(amulet,5,asesori).
 
 /** Potion (nama, jenis, harga) **/
 potion(fullblood,potion,200).
-potion(heal,potion,50).
-potion(doubleheal,potion,100).
 
 /* lain-lain wakwkakw */
 modalawal(Job) :-

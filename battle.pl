@@ -14,7 +14,7 @@ attack(Senjata) :-
     \+mulai(_),!.
 
 attack(Senjata) :-
-    \+isEnemyAlive(_),!.
+    \+isEnemyAlive(_),write('aaaaaaaaaaaaaaaaaaaaaaaaaa'),!.
 
 attack(Senjata) :-
     /* attack ke musuh */
