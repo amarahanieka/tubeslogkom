@@ -49,17 +49,25 @@ depanawal :-
 
 
 daftar :-
+    repeat,
     write('Choose your job!'), nl,
     write('1. swordsman'), nl,
     write('2. archer'), nl,
     write('3. sorcerer'), nl,
     write('Pilih pekerjaan yang anda inginkan (tulis swordsman/archer/sorcerer diakhiri .): '),
-    read(Job), nl, nl,
+    read(Job),
+    endread(Job),
+    nl, nl,
     asserta(job(Job)),
     asserta(identitas(Job, 1, 10, 5, 0, 100, 200)),
     modalawal(Job),
-    write('Silakan pergi ke Quest terlebih dahulu sebelum mulai bertarung.').
+    write('Silakan pergi ke Quest terlebih dahulu sebelum mulai bertarung.'),!.
 
+endread(swordsman).
+endread(archer).
+endread(socrerer).
+endread(X) :- 
+    write('masukan salah, silahkan ulang lagi !'),nl.
 
 start :-
     \+udahdepan(_),
@@ -92,4 +100,5 @@ quit :-
     forall(identitas(_,_,_,_,_,_,_),(retract(identitas(_,_,_,_,_,_,_)))),
     retract(positionX(_)),
     retract(positionY(_)),
+    retract(isEnemyAlive(_)),
     write('Terima kasih sudah bermain!'),!.

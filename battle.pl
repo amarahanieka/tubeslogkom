@@ -38,7 +38,7 @@ attack(Senjata) :-
     positionX(Xawal),
     positionY(Yawal),
     (HPEFinal=<0, HPPFinal>0->
-    write('You Win'),retract(isEnemyAlive(_)),retract(enemy(_,_,_,_)),nl,
+    youwin,retract(isEnemyAlive(_)),retract(enemy(_,_,_,_)),nl,
     cetak(0,0),keteranganmap,!,
     asserta(enemy(Musuh,Attack,Defense,25)),
     (isSlime(Xawal,Yawal,Xawal,Yawal,Xawal,Yawal),
@@ -56,8 +56,8 @@ attack(Senjata) :-
     Wolf1 is Wolf-1,
     retract(questlist(Slime,Goblin,_)), 
     asserta(questlist(Slime,Goblin,Wolf1)),(Slime =:= 0, Goblin =:= 0, Wolf1 =:= 0,questberhasil);
-    isBoss(Xawal,Yawal), write('Menang lawan bos'));
-    HPEFinal>0, HPPFinal=<0->write('You Lose'),nl,quit;
+    isBoss(Xawal,Yawal),youwin,bossdefeat);
+    HPEFinal>0, HPPFinal=<0->youlose;
     write('Musuh Belom Mati')).
 
 
@@ -95,7 +95,7 @@ specialattack(Senjata) :-
     positionX(Xawal),
     positionY(Yawal),
     (HPEFinal=<0, HPPFinal>0->
-    write('You Win'),retract(isEnemyAlive(_)),retract(enemy(_,_,_,_)),nl,
+    youwin,retract(isEnemyAlive(_)),retract(enemy(_,_,_,_)),nl,
     cetak(0,0),keteranganmap,!,
     asserta(enemy(Musuh,Attack,Defense,25)),
     (isSlime(Xawal,Yawal,Xawal,Yawal,Xawal,Yawal),
@@ -113,8 +113,8 @@ specialattack(Senjata) :-
     Wolf1 is Wolf-1,
     retract(questlist(Slime,Goblin,_)), 
     asserta(questlist(Slime,Goblin,Wolf1)),(Slime =:= 0, Goblin =:= 0, Wolf1 =:= 0,questberhasil);
-    isBoss(Xawal,Yawal), write('Menang lawan bos'));
-    HPEFinal>0, HPPFinal=<0->write('You Lose'),nl,quit;
+    isBoss(Xawal,Yawal), youwin,bossdefeat);
+    HPEFinal>0, HPPFinal=<0->youlose;
     write('Musuh Belom Mati')).
 
 
@@ -184,3 +184,38 @@ usePotion(Potion) :-
     retract(identitas(Job,Level,Attack,Defense,EXP,_,Gold)),
     asserta(identitas(Job,Level,Attack,Defense,EXP,1000,Gold)),
     write('Your HP: '), write('1000'),!.
+
+youwin :-
+    write('    *               +                *                    -                  *  '),nl,
+    write(' *            __    __   ________   __    __      __   __   __    __    ________        *   '),nl,
+    write('     +       |  |  |  | |   __   | |  |  |  |    |  | |  | |  |  |  |  |   __   |    *    '),nl,
+    write('         -   |  |__|  | |  |  |  | |  |  |  |    |  | |  | |  |  |  |  |  |  |  |      + '),nl,
+    write('   -         |_____   | |  |  |  | |  |  |  |    |  | |  | |  |  |  |  |  |  |  |    -  '),nl,
+    write('       *      _____|  | |  |__|  | |  |__|  |    |  |_|  |_|  |  |  |  |  |  |  |   *'),nl,
+    write('    +        |________| |________| |________|    |____________|  |__|  |__|  |__|     *'),nl,
+    write('        -               *           +               -            *                    '),nl,!.
+
+bossdefeat :-
+    write('                                         T     H    E                   '),nl,
+    write('                   ____________    ____________    ___________    ___________'),nl,
+    write('                  |   ______   |  |  _______   |  |   ________|  |   ________|'),nl,
+    write('                  |  |______|  |  |  |      |  |  |  |________   |  |________'),nl,
+    write('                  |  __________/  |  |      |  |  |________   |  |________   | '),nl,
+    write('                  |   ______   |  |  |______|  |   ________|  |   ________|  |'),nl,
+    write('                  |  |______|  |  |            |  |           |  |           | '),nl,
+    write('                  |____________|  |____________|  |___________|  |___________|'),nl,nl,
+    write('                        H  A  S    B  E  E  N    D  E  F  E  A  T  E  D'),nl,
+    write('                                   Congratulations, Warrior !'),nl,
+    quit.
+
+
+youlose :-
+    write('     |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||  '),nl,
+    write('         __    __   ________   __    __      __        ________    ________   _______        '),nl,
+    write('        |  |  |  | |   __   | |  |  |  |    |  |      |   __   |  |   _____| |   ____|     '),nl,
+    write('        |  |__|  | |  |  |  | |  |  |  |    |  |      |  |  |  |  |  |_____  |  |____    '),nl,
+    write('        |_____   | |  |  |  | |  |  |  |    |  |      |  |  |  |  |_____   | |   ____|  -  '),nl,
+    write('         _____|  | |  |__|  | |  |__|  |    |  |____  |  |__|  |   _____|  | |  |____'),nl,
+    write('        |________| |________| |________|    |_______| |________|  |________| |_______|   '),nl,nl,
+    write('     |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||  '),nl,
+    quit.
