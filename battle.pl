@@ -34,6 +34,8 @@ attack(Senjata) :-
     write('You Win'),retract(isEnemyAlive(_)),nl,
     positionX(Xawal),
     positionY(Yawal),
+    cetak(0,0),keteranganmap,!,
+    asserta(enemy(Musuh,Attack,Defense,25)),
     (isSlime(Xawal,Yawal,Xawal,Yawal,Xawal,Yawal),
     questlist(Slime,Goblin,Wolf),
     Slime1 is Slime-1,
@@ -44,11 +46,11 @@ attack(Senjata) :-
     Goblin1 is Goblin-1,
     retract(questlist(Slime,_,Wolf)), 
     asserta(questlist(Slime,Goblin1,Wolf)),(Goblin1 =:= 0,questberhasil);
+    isWolf(Xawal,Yawal,Xawal,Yawal,Xawal,Yawal),
     questlist(Slime,Goblin,Wolf),
     Wolf1 is Wolf-1,
     retract(questlist(Slime,Goblin,_)), 
-    asserta(questlist(Slime,Goblin,Wolf1)),(Wolf1 =:= 0,questberhasil)),
-    cetak(0,0),keteranganmap,!;
+    asserta(questlist(Slime,Goblin,Wolf1)),(Wolf1 =:= 0,questberhasil));
     HPEFinal>0, HPPFinal=<0->write('You Lose'),quit;
     write('Musuh Belom Mati')).
 
@@ -81,6 +83,8 @@ specialattack(Senjata) :-
     write('You Win'),retract(isEnemyAlive(_)),nl,
     positionX(Xawal),
     positionY(Yawal),
+    cetak(0,0),keteranganmap,!,
+    asserta(enemy(Musuh,Attack,Defense,25)),
     (isSlime(Xawal,Yawal,Xawal,Yawal,Xawal,Yawal),
     questlist(Slime,Goblin,Wolf),
     Slime1 is Slime-1,
@@ -91,11 +95,11 @@ specialattack(Senjata) :-
     Goblin1 is Goblin-1,
     retract(questlist(Slime,_,Wolf)), 
     asserta(questlist(Slime,Goblin1,Wolf));
+    isWolf(Xawal,Yawal,Xawal,Yawal,Xawal,Yawal),
     questlist(Slime,Goblin,Wolf),
     Wolf1 is Wolf-1,
     retract(questlist(Slime,Goblin,_)), 
-    asserta(questlist(Slime,Goblin,Wolf1))),
-    cetak(0,0),keteranganmap,!;
+    asserta(questlist(Slime,Goblin,Wolf1)));
     HPEFinal>0, HPPFinal=<0->write('You Lose'),quit;
     write('Musuh Belom Mati')).
 
