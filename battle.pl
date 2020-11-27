@@ -55,7 +55,7 @@ attack(Senjata) :-
     questlist(Slime,Goblin,Wolf),
     Wolf1 is Wolf-1,
     retract(questlist(Slime,Goblin,_)), 
-    asserta(questlist(Slime,Goblin,Wolf1)),(Wolf1 =:= 0,questberhasil));
+    asserta(questlist(Slime,Goblin,Wolf1)),(Slime =:= 0, Goblin =:= 0, Wolf1 =:= 0,questberhasil));
     HPEFinal>0, HPPFinal=<0->write('You Lose'),quit;
     write('Musuh Belom Mati')).
 
@@ -100,17 +100,17 @@ specialattack(Senjata) :-
     questlist(Slime,Goblin,Wolf),
     Slime1 is Slime-1,
     retract(questlist(_,Goblin,Wolf)), 
-    asserta(questlist(Slime1,Goblin,Wolf)); 
+    asserta(questlist(Slime1,Goblin,Wolf)),(Slime1 =:= 0,Goblin =:= 0, Wolf =:= 0, questberhasil); 
     isGoblin(Xawal,Yawal,Xawal,Yawal,Xawal,Yawal),
     questlist(Slime,Goblin,Wolf),
     Goblin1 is Goblin-1,
     retract(questlist(Slime,_,Wolf)), 
-    asserta(questlist(Slime,Goblin1,Wolf));
+    asserta(questlist(Slime,Goblin1,Wolf)),(Slime =:=0, Goblin1 =:= 0, Wolf =:= 0, questberhasil);
     isWolf(Xawal,Yawal,Xawal,Yawal,Xawal,Yawal),
     questlist(Slime,Goblin,Wolf),
     Wolf1 is Wolf-1,
     retract(questlist(Slime,Goblin,_)), 
-    asserta(questlist(Slime,Goblin,Wolf1)));
+    asserta(questlist(Slime,Goblin,Wolf1)),(Slime =:= 0, Goblin =:= 0, Wolf1 =:= 0,questberhasil));
     HPEFinal>0, HPPFinal=<0->write('You Lose'),quit;
     write('Musuh Belom Mati')).
 
