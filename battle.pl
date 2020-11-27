@@ -40,12 +40,12 @@ attack(Senjata) :-
     questlist(Slime,Goblin,Wolf),
     Slime1 is Slime-1,
     retract(questlist(_,Goblin,Wolf)), 
-    asserta(questlist(Slime1,Goblin,Wolf)),(Slime1 =:= 0,questberhasil); 
+    asserta(questlist(Slime1,Goblin,Wolf)),(Slime1 =:= 0,Goblin =:= 0, Wolf =:= 0, questberhasil); 
     isGoblin(Xawal,Yawal,Xawal,Yawal,Xawal,Yawal),
     questlist(Slime,Goblin,Wolf),
     Goblin1 is Goblin-1,
     retract(questlist(Slime,_,Wolf)), 
-    asserta(questlist(Slime,Goblin1,Wolf)),(Goblin1 =:= 0,questberhasil);
+    asserta(questlist(Slime,Goblin1,Wolf)),(Slime =:=0, Goblin1 =:= 0, Wolf =:= 0, questberhasil);
     isWolf(Xawal,Yawal,Xawal,Yawal,Xawal,Yawal),
     questlist(Slime,Goblin,Wolf),
     Wolf1 is Wolf-1,
