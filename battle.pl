@@ -125,6 +125,7 @@ usePotion(Potion) :-
     identitas(_,Level,_,_,_,_,_),
     Level=:=1,
     turn(X), XFinal is X+1, retract(turn(_)), asserta(turn(XFinal)),!,
+    delItem(Potion),
     retract(identitas(Job,Level,Attack,Defense,EXP,_,Gold)),
     asserta(identitas(Job,Level,Attack,Defense,EXP,100,Gold)),
     write('Your HP: '), write('100'),!.
@@ -135,6 +136,7 @@ usePotion(Potion) :-
     identitas(_,Level,_,_,_,_,_),
     Level=:=2,
     turn(X), XFinal is X+1, retract(turn(_)), asserta(turn(XFinal)),!,
+    delItem(Potion),
     retract(identitas(Job,Level,Attack,Defense,EXP,_,Gold)),
     asserta(identitas(Job,Level,Attack,Defense,EXP,500,Gold)),
     write('Your HP: '), write('500'),!.
@@ -145,6 +147,7 @@ usePotion(Potion) :-
     identitas(_,Level,_,_,_,_,_),
     Level=:=3,
     turn(X), XFinal is X+1, retract(turn(_)), asserta(turn(XFinal)),!,
+    delItem(Potion),
     retract(identitas(Job,Level,Attack,Defense,EXP,_,Gold)),
     asserta(identitas(Job,Level,Attack,Defense,EXP,1000,Gold)),
     write('Your HP: '), write('1000'),!.
