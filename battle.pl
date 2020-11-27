@@ -36,7 +36,7 @@ attack(Senjata) :-
     write('HP Player: '), write(HPPFinal),!,nl,
     write('HP Enemy: '), write(HPEFinal),!, nl,
     (HPEFinal=<0, HPPFinal>0->
-    write('You Win'),retract(isEnemyAlive(_)),nl,
+    write('You Win'),retract(isEnemyAlive(_)),retract(enemy(_,_,_,_)),nl,
     positionX(Xawal),
     positionY(Yawal),
     cetak(0,0),keteranganmap,!,
@@ -91,7 +91,7 @@ specialattack(Senjata) :-
     write('HP Player: '), write(HPPFinal),nl,
     write('HP Enemy: '), write(HPEFinal),nl,
     (HPEFinal=<0, HPPFinal>0->
-    write('You Win'),retract(isEnemyAlive(_)),nl,
+    write('You Win'),retract(isEnemyAlive(_)),retract(enemy(_,_,_,_)),nl,
     positionX(Xawal),
     positionY(Yawal),
     cetak(0,0),keteranganmap,!,

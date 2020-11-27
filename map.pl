@@ -326,6 +326,7 @@ w :-
     write('                                                         '),nl,
     write('                   T  H  E   S  L  I  M  E '),nl,
     asserta(isEnemyAlive(1)),
+    asserta(enemy(slime,10,5,25)),
     retract(positionY(_)),
     asserta(positionY(NextY)),set(Xawal,Yawal),!.
 
@@ -347,6 +348,7 @@ w :-
     write('                                                         '),nl,
     write('                   T  H  E   G  O  B  L  I  N '),nl,
     asserta(isEnemyAlive(1)),
+    asserta(enemy(goblin,10,5,25)),
     retract(positionY(_)),
     asserta(positionY(NextY)),set(Xawal,Yawal),!.
 
@@ -368,6 +370,7 @@ w :-
     write('                                                         '),nl,
     write('                     T  H  E   W  O  L  F '),nl,
     asserta(isEnemyAlive(1)),
+    asserta(enemy(wolf,10,5,25)),
     retract(positionY(_)),
     asserta(positionY(NextY)),set(Xawal,Yawal),!.
 
@@ -437,6 +440,7 @@ a :-
     write('                                                         '),nl,
     write('                   T  H  E   S  L  I  M  E '),nl,
     asserta(isEnemyAlive(1)),
+    asserta(slime(slime,10,5,25)),
     retract(positionX(_)),
     asserta(positionX(NextX)),set(Xawal,Yawal),!.
 
@@ -458,6 +462,7 @@ a :-
     write('                                                         '),nl,
     write('                   T  H  E   G  O  B  L  I  N '),nl,
     asserta(isEnemyAlive(1)),
+    asserta(goblin(slime,10,5,25)),
     retract(positionX(_)),
     asserta(positionX(NextX)),set(Xawal,Yawal),!.
 
@@ -479,6 +484,7 @@ a :-
     write('                                                         '),nl,
     write('                     T  H  E   W  O  L  F '),nl,
     asserta(isEnemyAlive(1)),
+    asserta(enemy(wolf,10,5,25)),
     retract(positionX(_)),
     asserta(positionX(NextX)),set(Xawal,Yawal),!.
 
@@ -545,6 +551,7 @@ s :-
     write('                                                         '),nl,
     write('                   T  H  E   S  L  I  M  E '),nl,
     asserta(isEnemyAlive(1)),
+    asserta(enemy(slime,10,5,25)),
     retract(positionY(_)),
     asserta(positionY(NextY)),set(Xawal,Yawal),!.
 
@@ -566,6 +573,7 @@ s :-
     write('                                                         '),nl,
     write('                   T  H  E   G  O  B  L  I  N '),nl,
     asserta(isEnemyAlive(1)),
+    asserta(enemy(goblin,10,5,25)),
     retract(positionY(_)),
     asserta(positionY(NextY)),set(Xawal,Yawal),!.
 
@@ -587,6 +595,7 @@ s :-
     write('                                                         '),nl,
     write('                     T  H  E   W  O  L  F '),nl,
     asserta(isEnemyAlive(1)),
+    asserta(enemy(wolf,10,5,25)),
     retract(positionY(_)),
     asserta(positionY(NextY)),set(Xawal,Yawal),!.
 
@@ -625,6 +634,7 @@ s :-
     write('      |  |______|  |  |            |  |           |  |           | '),nl,
     write('      |____________|  |____________|  |___________|  |___________|'),nl,
     asserta(isEnemyAlive(1)),
+    asserta(enemy(boss,100,50,1000)),
     retract(positionY(_)),
     asserta(positionY(NextY)),set(Xawal,Yawal),!.
 
@@ -692,6 +702,7 @@ d :-
     write('                                                         '),nl,
     write('                   T  H  E   S  L  I  M  E '),nl,
     asserta(isEnemyAlive(1)),
+    asserta(enemy(slime,10,5,25)),
     retract(positionX(_)),
     asserta(positionX(NextX)),set(Xawal,Yawal),!.
 
@@ -713,6 +724,7 @@ d :-
     write('                                                         '),nl,
     write('                   T  H  E   G  O  B  L  I  N '),nl,
     asserta(isEnemyAlive(1)),
+    asserta(enemy(goblin,10,5,25)),
     retract(positionX(_)),
     asserta(positionX(NextX)),set(Xawal,Yawal),!.
 
@@ -734,6 +746,7 @@ d :-
     write('                                                         '),nl,
     write('                     T  H  E   W  O  L  F '),nl,
     asserta(isEnemyAlive(1)),
+    asserta(enemy(wolf,10,5,25)),
     retract(positionX(_)),
     asserta(positionX(NextX)),set(Xawal,Yawal),!.
 
@@ -772,6 +785,7 @@ d :-
     write('      |  |______|  |  |            |  |           |  |           | '),nl,
     write('      |____________|  |____________|  |___________|  |___________|'),nl,
     asserta(isEnemyAlive(1)),
+    asserta(enemy(boss,100,50,1000)),
     retract(positionX(_)),
     asserta(positionX(NextX)),set(Xawal,Yawal),!.
 
