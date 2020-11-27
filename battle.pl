@@ -57,7 +57,7 @@ attack(Senjata) :-
     retract(questlist(Slime,Goblin,_)), 
     asserta(questlist(Slime,Goblin,Wolf1)),(Slime =:= 0, Goblin =:= 0, Wolf1 =:= 0,questberhasil);
     isBoss(Xawal,Yawal), write('Menang lawan bos'));
-    HPEFinal>0, HPPFinal=<0->write('You Lose'),quit;
+    HPEFinal>0, HPPFinal=<0->write('You Lose'),nl,quit;
     write('Musuh Belom Mati')).
 
 
@@ -114,7 +114,7 @@ specialattack(Senjata) :-
     retract(questlist(Slime,Goblin,_)), 
     asserta(questlist(Slime,Goblin,Wolf1)),(Slime =:= 0, Goblin =:= 0, Wolf1 =:= 0,questberhasil);
     isBoss(Xawal,Yawal), write('Menang lawan bos'));
-    HPEFinal>0, HPPFinal=<0->write('You Lose'),quit;
+    HPEFinal>0, HPPFinal=<0->write('You Lose'),nl,quit;
     write('Musuh Belom Mati')).
 
 
@@ -141,8 +141,6 @@ run :-
     identitas(_,_,AttackP,DefenseP,_,HPP,_),
     HPP1 is HPP - AttackE,
     HPPFinal is HPP1 + DefenseP,
-    retract(enemy(Musuh,Attack,Defense,HPE)),
-    asserta(enemy(Musuh,Attack,Defense,HPEFinal)),
     retract(identitas(Job,Level,Attack,Defense,EXP,_,Gold)),
     asserta(identitas(Job,Level,Attack,Defense,EXP,HPPFinal,Gold)),
     write('HP Player: '), write(HPPFinal),nl,!
