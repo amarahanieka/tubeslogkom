@@ -89,7 +89,7 @@ generateSlime :-
     BMax is L-2,
     KMax is P-2,
     random(1,3,SX1),
-    random(8,BMax,SX2),
+    random(8,10,SX2),
     random(4,6,SX3),
     random(9,KMax,SY1),
     random(9,12,SY2),
@@ -101,12 +101,12 @@ generateGoblin :-
     kesamping(P),
     BMax is L-2,
     KMax is P-2,
-    random(2,BMax,GX1),
-    random(2,BMax,GX2),
-    random(2,BMax,GX3),
-    random(2,KMax,GY1),
-    random(2,KMax,GY2),
-    random(2,KMax,GY3),
+    random(2,3,GX1),
+    random(12,BMax,GX2),
+    random(12,BMax,GX3),
+    random(4,7,GY1),
+    random(1,4,GY2),
+    random(9,11,GY3),
     asserta(goblin(GX1,GY1,GX2,GY2,GX3,GY3)).
 
 generateWolf :-
@@ -114,12 +114,12 @@ generateWolf :-
     kesamping(P),
     BMax is L-2,
     KMax is P-2,
-    random(2,BMax,WX1),
-    random(2,BMax,WX2),
-    random(2,BMax,WX3),
-    random(2,KMax,WY1),
-    random(2,KMax,WY2),
-    random(2,KMax,WY3),
+    random(4,6,WX1),
+    random(8,11,WX2),
+    random(12,BMax,WX3),
+    random(8,11,WY1),
+    random(1,4,WY2),
+    random(5,8,WY3),
     asserta(wolf(WX1,WY1,WX2,WY2,WX3,WY3)).
 
 isSlime(X1,Y1,X2,Y2,X3,Y3) :-

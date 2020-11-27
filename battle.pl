@@ -11,6 +11,12 @@ specialAvail :-
 
 /* attack(senjata yang dipake, HP akhir enemy) --> mengattack enemy */
 attack(Senjata) :-
+    \+mulai(_),!.
+
+attack(Senjata) :-
+    \+isEnemyAlive(_),!.
+
+attack(Senjata) :-
     /* attack ke musuh */
     iniinventory(Senjata,_),
     enemy(_,AttackE,DefenseE,HPE),
@@ -56,6 +62,12 @@ attack(Senjata) :-
 attack(Senjata) :-
     \+iniinventory(Senjata,_),
     write('Tidak ada item tersebut di inventory anda'),!.
+
+specialattack(Senjata) :-
+    \+mulai(_),!.
+
+specialattack(Senjata) :-
+    \+isEnemyAlive(_),!.
 
 specialattack(Senjata) :-
     /* attack ke musuh */
