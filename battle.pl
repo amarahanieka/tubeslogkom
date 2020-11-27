@@ -2,13 +2,12 @@
 :- dynamic(identitas/7).
 :- dynamic(turn/1).
 
-turn(0).
+turn(4).
 
 /* Check jika special attack bisa digunakan atau tidak */
 specialAvail :-
     turn(X),
-    Y is X mod 3,
-    Y = 0.
+    X>=3.
 
 /* attack(senjata yang dipake, HP akhir enemy) --> mengattack enemy */
 attack(Senjata) :-
@@ -76,7 +75,7 @@ specialattack(Senjata) :-
     asserta(enemy(Musuh,Attack,Defense,HPEFinal)),
     retract(identitas(Job,Level,Attack,Defense,EXP,_,Gold)),
     asserta(identitas(Job,Level,Attack,Defense,EXP,HPPFinal,Gold)),
-    turn(X), XFinal is X+1, retract(turn(_)), asserta(turn(XFinal)),!,
+    turn(X), retract(turn(_)), asserta(turn(0)),!,
     write('HP Player: '), write(HPPFinal),nl,
     write('HP Enemy: '), write(HPEFinal),nl,
     (HPEFinal=<0, HPPFinal>0->
