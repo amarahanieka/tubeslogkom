@@ -6,7 +6,7 @@ naiklevel(Level) :-
     LevelBaru is (Level+1),
     AttackBaru is (Attack+35),
     DefenseBaru is (Defense+20),
-    HPBaru is 400,
+    HPBaru is 500,
     retract(identitas(Job, Level, _, _, _, _, _)),
     asserta(identitas(Job, LevelBaru, AttackBaru, DefenseBaru, EXP, HPBaru, Gold)).
 
@@ -18,6 +18,17 @@ naiklevel(Level) :-
     AttackBaru is (Attack+35),
     DefenseBaru is (Defense+20),
     HPBaru is 1000,
+    retract(identitas(Job, Level, _, _, _, _, _)),
+    asserta(identitas(Job, LevelBaru, AttackBaru, DefenseBaru, EXP, HPBaru, Gold)).
+
+naiklevel(Level) :-
+    identitas(Job, Level, Attack, Defense, EXP, HP, Gold),
+    EXP >= 1500,
+    Level = 3,
+    LevelBaru is (Level+1),
+    AttackBaru is (Attack+10),
+    DefenseBaru is (Defense+2),
+    HPBaru is 1100,
     retract(identitas(Job, Level, _, _, _, _, _)),
     asserta(identitas(Job, LevelBaru, AttackBaru, DefenseBaru, EXP, HPBaru, Gold)).
 

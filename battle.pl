@@ -38,7 +38,12 @@ attack(Senjata) :-
     positionX(Xawal),
     positionY(Yawal),
     (HPEFinal=<0, HPPFinal>0->
-    youwin,retract(isEnemyAlive(_)),retract(enemy(_,_,_,_)),nl,
+    youwin,retract(isEnemyAlive(_)),nl,nl,
+    write('Selamat, anda mendapatkan reward 100 gold.'), nl, nl,
+    identitas(Job,Level,Attack,Defense,EXP,HP,Gold),
+    HadiahGold is Gold+100,
+    retract(identitas(Job,Level,Attack,Defense,EXP,HP,_)),
+    asserta(identitas(Job,Level,Attack,Defense,EXP,HP,HadiahGold)),
     cetak(0,0),keteranganmap,!,
     asserta(enemy(Musuh,Attack,Defense,25)),
     (isSlime(Xawal,Yawal,Xawal,Yawal,Xawal,Yawal),
@@ -69,7 +74,8 @@ specialattack(Senjata) :-
     \+mulai(_),!.
 
 specialattack(Senjata) :-
-    \+isEnemyAlive(_),!.
+    \+isEnemyAlive(_),
+    write('Musuh sudah mati'),!.
 
 specialattack(Senjata) :-
     /* attack ke musuh */
@@ -95,7 +101,13 @@ specialattack(Senjata) :-
     positionX(Xawal),
     positionY(Yawal),
     (HPEFinal=<0, HPPFinal>0->
-    youwin,retract(isEnemyAlive(_)),retract(enemy(_,_,_,_)),nl,
+    youwin,retract(isEnemyAlive(_)),nl,
+    nl,
+    write('Selamat, anda mendapatkan reward 100 gold.'), nl, nl,
+    identitas(Job,Level,Attack,Defense,EXP,HP,Gold),
+    HadiahGold is Gold+100,
+    retract(identitas(Job,Level,Attack,Defense,EXP,HP,_)),
+    asserta(identitas(Job,Level,Attack,Defense,EXP,HP,HadiahGold)),
     cetak(0,0),keteranganmap,!,
     asserta(enemy(Musuh,Attack,Defense,25)),
     (isSlime(Xawal,Yawal,Xawal,Yawal,Xawal,Yawal),
