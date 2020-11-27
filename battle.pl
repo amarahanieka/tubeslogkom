@@ -1,5 +1,14 @@
 :- dynamic(enemy/4).
 :- dynamic(identitas/7).
+:- dynamic(turn/1).
+
+turn(0).
+
+/* Check jika special attack bisa digunakan atau tidak */
+specialAvail :-
+    turn(X),
+    Y is X mod 3,
+    Y = 0.
 
 /* attack(senjata yang dipake, HP akhir enemy) --> mengattack enemy */
 attack(Senjata) :-
@@ -18,6 +27,7 @@ attack(Senjata) :-
     asserta(enemy(Musuh,Attack,Defense,HPEFinal)),
     retract(identitas(Job,Level,Attack,Defense,EXP,_,Gold)),
     asserta(identitas(Job,Level,Attack,Defense,EXP,HPPFinal,Gold)),
+    turn(X), XFinal is X+1, retract(turn(_)), asserta(turn(XFinal)),!,
     write('HP Player: '), write(HPPFinal),!,nl,
     write('HP Enemy: '), write(HPEFinal),!, nl,
     (HPEFinal=<0, HPPFinal>0->
@@ -44,10 +54,11 @@ attack(Senjata) :-
 
 attack(Senjata) :-
     \+iniinventory(Senjata,_),
-    write('Tidak ada item tersebut di inventory anda').
+    write('Tidak ada item tersebut di inventory anda'),!.
 
 specialattack(Senjata) :-
     /* attack ke musuh */
+    specialAvail,
     iniinventory(Senjata,_),
     enemy(_,AttackE,DefenseE,HPE),
     senjata(Senjata,AttackSen,Jenis,Owner),
@@ -63,6 +74,7 @@ specialattack(Senjata) :-
     asserta(enemy(Musuh,Attack,Defense,HPEFinal)),
     retract(identitas(Job,Level,Attack,Defense,EXP,_,Gold)),
     asserta(identitas(Job,Level,Attack,Defense,EXP,HPPFinal,Gold)),
+    turn(X), XFinal is X+1, retract(turn(_)), asserta(turn(XFinal)),!,
     write('HP Player: '), write(HPPFinal),nl,
     write('HP Enemy: '), write(HPEFinal),nl,
     (HPEFinal=<0, HPPFinal>0->
@@ -88,55 +100,48 @@ specialattack(Senjata) :-
     write('Musuh Belom Mati')).
 
 specialattack(Senjata) :-
+    \+specialAvail,
+    write('Special attack is unavailable'),!.
+
+specialattack(Senjata) :-
     \+iniinventory(Senjata,_),
-    write('Tidak ada item tersebut di inventory anda').
+    write('Tidak ada item tersebut di inventory anda'),!.
 
 run :- 
     random(0,2,Hasil),
+    turn(X), XFinal is X+1, retract(turn(_)), asserta(turn(XFinal)),!,
     (Hasil=:=0->write('GAGAL KABUR BANG');retract(isEnemyAlive(_)),cetak(0,0),keteranganmap,!).
 
 usepotion(potion) :-
     \+iniinventory(potion,_),
-    write('Tidak ada item tersebut di inventory anda').
+    write('Tidak ada item tersebut di inventory anda'),!.
 
-usepotion(potion) :-
-    iniinventory(potion,_),
-    potion == fullblood,
-    identitas(_,1,_,_,_,_,_),
+usePotion(Potion) :-
+    iniinventory(Potion,_),
+    Potion == fullblood,
+    identitas(_,Level,_,_,_,_,_),
+    Level=:=1,
+    turn(X), XFinal is X+1, retract(turn(_)), asserta(turn(XFinal)),!,
     retract(identitas(Job,Level,Attack,Defense,EXP,_,Gold)),
     asserta(identitas(Job,Level,Attack,Defense,EXP,100,Gold)),
-    write("Your HP: "), write('100'),!.
+    write('Your HP: '), write('100'),!.
 
-usepotion(potion) :-
-    iniinventory(potion,_),
-    potion == fullblood,
-    identitas(_,2,_,_,_,_,_),
+usePotion(Potion) :-
+    iniinventory(Potion,_),
+    Potion == fullblood,
+    identitas(_,Level,_,_,_,_,_),
+    Level=:=2,
+    turn(X), XFinal is X+1, retract(turn(_)), asserta(turn(XFinal)),!,
     retract(identitas(Job,Level,Attack,Defense,EXP,_,Gold)),
     asserta(identitas(Job,Level,Attack,Defense,EXP,500,Gold)),
-    write("Your HP: "), write('500'),!.
+    write('Your HP: '), write('500'),!.
 
-usepotion(potion) :-
-    iniinventory(potion,_),
-    potion == fullblood,
-    identitas(_,3,_,_,_,_,_),
+usePotion(Potion) :-
+    iniinventory(Potion,_),
+    Potion == fullblood,
+    identitas(_,Level,_,_,_,_,_),
+    Level=:=3,
+    turn(X), XFinal is X+1, retract(turn(_)), asserta(turn(XFinal)),!,
     retract(identitas(Job,Level,Attack,Defense,EXP,_,Gold)),
     asserta(identitas(Job,Level,Attack,Defense,EXP,1000,Gold)),
-    write("Your HP: "), write('1000'),!.
-
-usepotion(potion) :-
-    iniinventory(potion,_),
-    potion == heal,
-    identitas(_,_,_,_,_,HP,_),
-    HPheal is HP + 50,
-    retract(identitas(Job,Level,Attack,Defense,EXP,_,Gold)),
-    asserta(identitas(Job,Level,Attack,Defense,EXP,HPheal,Gold)),
-    write("Your HP: "), write(HPheal),!.
-
-usepotion(potion) :-
-    iniinventory(potion,_),
-    potion == heal,
-    identitas(_,_,_,_,_,HP,_),
-    HPdoubleheal is HP + 100,
-    retract(identitas(Job,Level,Attack,Defense,EXP,_,Gold)),
-    asserta(identitas(Job,Level,Attack,Defense,EXP,HPdoubleheal,Gold)),
-    write("Your HP: "), write(HPdoubleheal),!.
+    write('Your HP: '), write('1000'),!.
