@@ -60,5 +60,6 @@ questberhasil :-
     write('*******************************************************************************'),nl,
     Y is EXP+E,
     retract(identitas(_,_,_,_,_,_,_)),
+    retract(questlist(_,_,_)),
     asserta(identitas(Job, Level, Attack, Defense, Y, HP, Gold)),
     naiklevel(Level),1 =:= 1.
