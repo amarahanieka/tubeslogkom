@@ -54,10 +54,11 @@ daftar :-
     write('2. archer'), nl,
     write('3. sorcerer'), nl,
     write('Pilih pekerjaan yang anda inginkan (tulis swordsman/archer/sorcerer diakhiri .): '),
-    read(Job), nl,
+    read(Job), nl, nl,
     asserta(job(Job)),
     asserta(identitas(Job, 1, 10, 5, 0, 100, 200)),
-    modalawal(Job).
+    modalawal(Job),
+    write('Silakan pergi ke Quest terlebih dahulu sebelum mulai bertarung.').
 
 
 start :-
