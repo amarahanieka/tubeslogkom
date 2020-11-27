@@ -35,15 +35,10 @@ attack(Senjata) :-
     turn(X), XFinal is X+1, retract(turn(_)), asserta(turn(XFinal)),!,
     write('HP Player: '), write(HPPFinal),!,nl,
     write('HP Enemy: '), write(HPEFinal),!, nl,
-    (HPEFinal=<0, HPPFinal>0->
-    write('You Win'),retract(isEnemyAlive(_)),retract(enemy(_,_,_,_)),nl,
-    write('Selamat, anda mendapatkan reward 100 gold.'), nl, nl,
-    identitas(Job,Level,Attack,Defense,EXP,HP,Gold),
-    HadiahGold is Gold+100,
-    retract(identitas(Job,Level,Attack,Defense,EXP,HP,_)),
-    asserta(identitas(Job,Level,Attack,Defense,EXP,HP,HadiahGold)),
     positionX(Xawal),
     positionY(Yawal),
+    (HPEFinal=<0, HPPFinal>0->
+    write('You Win'),retract(isEnemyAlive(_)),retract(enemy(_,_,_,_)),nl,
     cetak(0,0),keteranganmap,!,
     asserta(enemy(Musuh,Attack,Defense,25)),
     (isSlime(Xawal,Yawal,Xawal,Yawal,Xawal,Yawal),
@@ -60,9 +55,11 @@ attack(Senjata) :-
     questlist(Slime,Goblin,Wolf),
     Wolf1 is Wolf-1,
     retract(questlist(Slime,Goblin,_)), 
-    asserta(questlist(Slime,Goblin,Wolf1)),(Slime =:= 0, Goblin =:= 0, Wolf1 =:= 0,questberhasil));
+    asserta(questlist(Slime,Goblin,Wolf1)),(Slime =:= 0, Goblin =:= 0, Wolf1 =:= 0,questberhasil);
+    isBoss(Xawal,Yawal), write('Menang lawan bos'));
     HPEFinal>0, HPPFinal=<0->write('You Lose'),quit;
     write('Musuh Belom Mati')).
+
 
 attack(Senjata) :-
     \+iniinventory(Senjata,_),
@@ -95,15 +92,10 @@ specialattack(Senjata) :-
     turn(X), retract(turn(_)), asserta(turn(0)),!,
     write('HP Player: '), write(HPPFinal),nl,
     write('HP Enemy: '), write(HPEFinal),nl,
-    (HPEFinal=<0, HPPFinal>0->
-    write('You Win'),retract(isEnemyAlive(_)),retract(enemy(_,_,_,_)),nl,
-    write('Selamat, anda mendapatkan reward 100 gold.'), nl, nl,
-    identitas(Job,Level,Attack,Defense,EXP,HP,Gold),
-    HadiahGold is Gold+100,
-    retract(identitas(Job,Level,Attack,Defense,EXP,HP,_)),
-    asserta(identitas(Job,Level,Attack,Defense,EXP,HP,HadiahGold)),
     positionX(Xawal),
     positionY(Yawal),
+    (HPEFinal=<0, HPPFinal>0->
+    write('You Win'),retract(isEnemyAlive(_)),retract(enemy(_,_,_,_)),nl,
     cetak(0,0),keteranganmap,!,
     asserta(enemy(Musuh,Attack,Defense,25)),
     (isSlime(Xawal,Yawal,Xawal,Yawal,Xawal,Yawal),
@@ -120,9 +112,11 @@ specialattack(Senjata) :-
     questlist(Slime,Goblin,Wolf),
     Wolf1 is Wolf-1,
     retract(questlist(Slime,Goblin,_)), 
-    asserta(questlist(Slime,Goblin,Wolf1)),(Slime =:= 0, Goblin =:= 0, Wolf1 =:= 0,questberhasil));
+    asserta(questlist(Slime,Goblin,Wolf1)),(Slime =:= 0, Goblin =:= 0, Wolf1 =:= 0,questberhasil);
+    isBoss(Xawal,Yawal), write('Menang lawan bos'));
     HPEFinal>0, HPPFinal=<0->write('You Lose'),quit;
     write('Musuh Belom Mati')).
+
 
 specialattack(Senjata) :-
     \+specialAvail,
@@ -132,10 +126,29 @@ specialattack(Senjata) :-
     \+iniinventory(Senjata,_),
     write('Tidak ada item tersebut di inventory anda'),!.
 
+run :-
+    \+mulai(_),!.
+
+run :-
+    \+isEnemyAlive(_),!.
+
+
 run :- 
     random(0,2,Hasil),
     turn(X), XFinal is X+1, retract(turn(_)), asserta(turn(XFinal)),!,
-    (Hasil=:=0->write('GAGAL KABUR BANG');retract(isEnemyAlive(_)),cetak(0,0),keteranganmap,!).
+    (Hasil=:=0->write('GAGAL KABUR BANG'),nl,
+    enemy(_,AttackE,DefenseE,HPE),
+    identitas(_,_,AttackP,DefenseP,_,HPP,_),
+    HPP1 is HPP - AttackE,
+    HPPFinal is HPP1 + DefenseP,
+    retract(enemy(Musuh,Attack,Defense,HPE)),
+    asserta(enemy(Musuh,Attack,Defense,HPEFinal)),
+    retract(identitas(Job,Level,Attack,Defense,EXP,_,Gold)),
+    asserta(identitas(Job,Level,Attack,Defense,EXP,HPPFinal,Gold)),
+    write('HP Player: '), write(HPPFinal),nl,!
+    ;retract(isEnemyAlive(_)),
+    asserta(enemy(Musuh,Attack,Defense,HP)),
+    cetak(0,0),keteranganmap,!).
 
 usepotion(potion) :-
     \+iniinventory(potion,_),
