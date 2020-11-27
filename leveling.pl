@@ -12,7 +12,7 @@ naiklevel(Level) :-
 
 naiklevel(Level) :-
     identitas(Job, Level, Attack, Defense, EXP, HP, Gold),
-    EXP >= 750,
+    EXP >= 1000,
     Level = 2,
     LevelBaru is (Level+1),
     AttackBaru is (Attack+35),
